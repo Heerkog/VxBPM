@@ -1,0 +1,17 @@
+<CPNElement id="StartIntermediateEvent">
+    <incomingElements>
+    </incomingElements>
+    <outgoingElements>
+        <outgoingElement>t1</outgoingElement>
+    </outgoingElements>
+    <places>
+        <place id="p1" x="0" y="0" token="true"/>
+
+    </places>
+    <transitions>
+        <transition id="t1" x="1" y="0"/>
+    </transitions>
+    <arcs>
+        <arc id="a1" from="p1" to="t1"/>
+    </arcs>
+</CPNElement>

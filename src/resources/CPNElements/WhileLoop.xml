@@ -1,0 +1,33 @@
+<CPNElement id="LoopWhile">
+    <variables>
+        <variable name="P">
+            <value>1</value>
+            <value>0</value>
+        </variable>
+    </variables>
+    <incomingElements>
+        <incomingElement>p1</incomingElement>
+    </incomingElements>
+    <outgoingElements>
+        <outgoingElement>t3</outgoingElement>
+    </outgoingElements>
+    <places>
+        <place id="p1" x="0" y="0.6"/>
+        <place id="p2" x="3" y="0.6"/>
+        <place id="p3" x="6" y="0.6"/>
+    </places>
+    <transitions>
+        <transition id="t1" x="1" y="0.6"/>
+        <transition id="t2" x="4" y="0.6"/>
+        <transition id="t3" x="7" y="0.6"/>
+    </transitions>
+    <arcs>
+        <arc id="a1" from="p1" to="t1"/>
+        <arc id="a2" from="t1" to="p2" condition="P == 0"/>
+        <arc id="a3" from="p2" to="t2"/>
+        <arc id="a4" from="t2" to="p3" condition="P == 1"/>
+        <arc id="a5" from="t1" to="p3" condition="P == 1" x="4" y="0.4"/>
+        <arc id="a6" from="p3" to="t3"/>
+        <arc id="a7" from="p2" to="t2" condition="P == 0" x="4" y="0.7"/>
+    </arcs>
+</CPNElement>

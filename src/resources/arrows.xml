@@ -1,0 +1,275 @@
+<?xml version="1.0"?>
+<arrows>
+    <!--Prerequisite-->
+    <arrow id="prerequisite" name="Prerequisite" dashed="true">
+        <sourceShapes>
+            <shape>eclipseFilled</shape>
+            <shape>arrowEast</shape>
+        </sourceShapes>
+        <centerShapes>
+        </centerShapes>
+        <targetShapes>
+            <shape>arrowEast</shape>
+        </targetShapes>
+    </arrow>
+    <!--Exclusion-->
+    <arrow id="exclusion" name="Exclusion" dashed="true">
+        <sourceShapes>
+            <shape>eclipseFilled</shape>
+            <shape>arrowEast</shape>
+        </sourceShapes>
+        <centerShapes>
+        </centerShapes>
+        <targetShapes>
+            <shape>rectangle</shape>
+        </targetShapes>
+    </arrow>
+    <!--Substitution-->
+    <arrow id="substitution" name="Substitution" dashed="true">
+        <sourceShapes>
+            <shape>eclipseFilled</shape>
+            <shape>rectangle</shape>
+        </sourceShapes>
+        <centerShapes>
+        </centerShapes>
+        <targetShapes>
+            <shape>arrowEast</shape>
+        </targetShapes>
+    </arrow>
+    <!--Admittance-->
+    <arrow id="admittance" name="Admittance" dashed="true">
+        <sourceShapes>
+            <shape>eclipseFilled</shape>
+            <shape>rectangle</shape>
+        </sourceShapes>
+        <centerShapes>
+        </centerShapes>
+        <targetShapes>
+            <shape>rectangle</shape>
+        </targetShapes>
+    </arrow>
+    <!--Corequisite-->
+    <arrow id="corequisite" name="Corequisite" dashed="true">
+        <sourceShapes>
+            <shape>arrowWest</shape>
+        </sourceShapes>
+        <centerShapes>
+            <shape>arrowWest</shape>
+            <shape>eclipseFilled</shape>
+            <shape>arrowEast</shape>
+        </centerShapes>
+        <targetShapes>
+            <shape>arrowEast</shape>
+        </targetShapes>
+    </arrow>
+    <!--ExclusiveChoice-->
+    <arrow id="exclusiveChoice" name="ExclusiveChoice" dashed="true">
+        <sourceShapes>
+            <shape>rectangle</shape>
+        </sourceShapes>
+        <centerShapes>
+            <shape>arrowWest</shape>
+            <shape>eclipseFilled</shape>
+            <shape>arrowEast</shape>
+        </centerShapes>
+        <targetShapes>
+            <shape>rectangle</shape>
+        </targetShapes>
+    </arrow>
+    <!--CausalSelect-->
+    <arrow id="causalSelect" name="CausalSelect" dashed="true">
+        <sourceShapes>
+            <shape>eclipseFilled</shape>
+            <shape>rectangle</shape>
+            <shape>arrowEast</shape>
+        </sourceShapes>
+        <centerShapes>
+        </centerShapes>
+        <targetShapes>
+            <shape>rectangle</shape>
+            <shape>arrowEast</shape>
+        </targetShapes>
+    </arrow>
+    <!--AlwaysFinally-->
+    <arrow id="alwaysFinally" name="AlwaysFinally" dashed="true">
+        <sourceShapes>
+            <shape>eclipseFilled</shape>
+        </sourceShapes>
+        <centerShapes>
+        </centerShapes>
+        <targetShapes>
+            <shape>arrowEastFilled</shape>
+        </targetShapes>
+    </arrow>
+    <!--ExistsFinally-->
+    <arrow id="existsFinally" name="ExistsFinally" dashed="true">
+        <sourceShapes>
+            <shape>eclipseFilled</shape>
+        </sourceShapes>
+        <centerShapes>
+        </centerShapes>
+        <targetShapes>
+            <shape>arrowEast</shape>
+        </targetShapes>
+    </arrow>
+    <!--AlwaysNext-->
+    <arrow id="alwaysNext" name="AlwaysNext" dashed="false">
+        <sourceShapes>
+            <shape>eclipseFilled</shape>
+        </sourceShapes>
+        <centerShapes>
+        </centerShapes>
+        <targetShapes>
+            <shape>arrowEastFilled</shape>
+        </targetShapes>
+    </arrow>
+    <!--ExistsNext-->
+    <arrow id="existsNext" name="ExistsNext" dashed="false">
+        <sourceShapes>
+            <shape>eclipseFilled</shape>
+        </sourceShapes>
+        <centerShapes>
+        </centerShapes>
+        <targetShapes>
+            <shape>arrowEast</shape>
+        </targetShapes>
+    </arrow>
+    <!--AlwaysNever-->
+    <arrow id="alwaysNever" name="AlwaysNever" dashed="true">
+        <sourceShapes>
+            <shape>eclipseFilled</shape>
+        </sourceShapes>
+        <centerShapes>
+        </centerShapes>
+        <targetShapes>
+            <shape>rectangleFilled</shape>
+        </targetShapes>
+    </arrow>
+    <!--ExistsNever-->
+    <arrow id="existsNever" name="ExistsNever" dashed="true">
+        <sourceShapes>
+            <shape>eclipseFilled</shape>
+        </sourceShapes>
+        <centerShapes>
+        </centerShapes>
+        <targetShapes>
+            <shape>rectangle</shape>
+        </targetShapes>
+    </arrow>
+    <!--AlwaysNotNext-->
+    <arrow id="alwaysNotNext" name="AlwaysNotNext" dashed="false">
+        <sourceShapes>
+            <shape>eclipseFilled</shape>
+        </sourceShapes>
+        <centerShapes>
+        </centerShapes>
+        <targetShapes>
+            <shape>rectangleFilled</shape>
+        </targetShapes>
+    </arrow>
+    <!--ExistsNotNext-->
+    <arrow id="existsNotNext" name="ExistsNotNext" dashed="false">
+        <sourceShapes>
+            <shape>eclipseFilled</shape>
+        </sourceShapes>
+        <centerShapes>
+        </centerShapes>
+        <targetShapes>
+            <shape>rectangle</shape>
+        </targetShapes>
+    </arrow>
+    <!--Cooccurrence-->
+    <arrow id="cooccurrence" name="Cooccurrence" dashed="true">
+        <sourceShapes>
+            <shape>arrowWest</shape>
+        </sourceShapes>
+        <centerShapes>
+            <shape>eclipse</shape>
+        </centerShapes>
+        <targetShapes>
+            <shape>arrowEast</shape>
+        </targetShapes>
+    </arrow>
+    <!--Coexecution-->
+    <arrow id="coexecution" name="Coexecution" dashed="true">
+        <sourceShapes>
+            <shape>arrowWestFilled</shape>
+        </sourceShapes>
+        <centerShapes>
+            <shape>eclipse</shape>
+        </centerShapes>
+        <targetShapes>
+            <shape>arrowEastFilled</shape>
+        </targetShapes>
+    </arrow>
+    <!--ParallelExecution-->
+    <arrow id="parallelExecution" name="ParallelExecution" dashed="true">
+        <sourceShapes>
+            <shape>parallel</shape>
+        </sourceShapes>
+        <centerShapes>
+            <shape>eclipseFilled</shape>
+        </centerShapes>
+        <targetShapes>
+            <shape>parallel</shape>
+        </targetShapes>
+    </arrow>
+    <!--ExistsNotNext-->
+    <arrow id="exclusiveExecution" name="ExclusiveExecution" dashed="true">
+        <sourceShapes>
+            <shape>exclusive</shape>
+        </sourceShapes>
+        <centerShapes>
+            <shape>eclipseFilled</shape>
+        </centerShapes>
+        <targetShapes>
+            <shape>exclusive</shape>
+        </targetShapes>
+    </arrow>
+
+
+
+
+    <!--CTL Object constraints-->
+    <arrow id="objectCTLEFp" name="EF p">
+        <centerShapes>
+            <shape>rectangle</shape>
+        </centerShapes>
+    </arrow>
+    <arrow id="objectCTLAFp" name="AF p">
+        <centerShapes>
+            <shape>rectangleFilled</shape>
+        </centerShapes>
+    </arrow>
+    <arrow id="objectCTLAG!p" name="AG !p">
+        <centerShapes>
+            <shape>rectangle</shape>
+            <shape>rectangleFilled</shape>
+        </centerShapes>
+    </arrow>
+    <arrow id="objectCTLEG!p" name="EG !p">
+        <centerShapes>
+            <shape>eclipseFilled</shape>
+        </centerShapes>
+    </arrow>
+    <!--LTL Object constraints-->
+    <arrow id="objectLTLFp" name="F p">
+        <centerShapes>
+            <shape>eclipse</shape>
+        </centerShapes>
+    </arrow>
+    <arrow id="objectLTLG!p" name="G !p">
+        <centerShapes>
+            <shape>eclipseFilled</shape>
+            <shape>rectangle</shape>
+        </centerShapes>
+    </arrow>
+    <!--Justice Object constraints-->
+    <arrow id="objectJustice!p" name="!p">
+        <centerShapes>
+            <shape>eclipse</shape>
+            <shape>rectangle</shape>
+        </centerShapes>
+    </arrow>
+</arrows>
+

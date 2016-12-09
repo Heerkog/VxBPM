@@ -1,0 +1,26 @@
+<CPNElement id="IntermediateEvent">
+    <incomingElements>
+        <incomingElement>p1</incomingElement>
+    </incomingElements>
+    <outgoingElements>
+        <outgoingElement>t2</outgoingElement>
+    </outgoingElements>
+    <incomingMessageElement>t1</incomingMessageElement>
+    <outgoingMessageElement>t2</outgoingMessageElement>
+
+    <places>
+        <place id="p1" x="0" y="0"/>
+        <place id="p2" x="2" y="1"/>
+    </places>
+    <transitions>
+        <transition id="t1" x="1" y="1" name="t{x}"/>
+        <transition id="t2" x="2" y="0" name="t{x}"/>
+    </transitions>
+    <arcs>
+        <arc id="a1" from="p1" to="t1" x="0.4" y="1"/>
+        <arc id="a2" from="p1" to="t2"/>
+        <arc id="a3" from="t1" to="p2"/>
+        <arc id="a4" from="p2" to="t2"/>
+        <arc id="a5" from="t1" to="p1" x="0.4" y="1"/>
+    </arcs>
+</CPNElement>

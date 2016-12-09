@@ -1,0 +1,25 @@
+<CPNElement id="miVariant">
+    <incomingElements>
+        <incomingElement>p1</incomingElement>
+    </incomingElements>
+    <outgoingElements>
+        <outgoingElement>t3</outgoingElement>
+    </outgoingElements>
+    <places>
+        <place id="p1" x="0" y="0"/>
+        <place id="p2" x="2" y="0"/>
+        <place id="p3" x="3.8" y="0"/>
+    </places>
+    <transitions>
+        <transition id="t1" x="0.8" y="0"/>
+        <transition id="t2" x="3" y="0" name="s"/>
+        <transition id="t3" x="5" y="0"/>
+    </transitions>
+    <arcs>
+        <arc id="a1" from="p1" to="t1"/>
+        <arc id="a2" from="t1" to="p2" weight="{n}"/>
+        <arc id="a3" from="p2" to="t2"/>
+        <arc id="a4" from="t2" to="p3"/>
+        <arc id="a5" from="p3" to="t3" weight="{n}"/>
+    </arcs>
+</CPNElement>

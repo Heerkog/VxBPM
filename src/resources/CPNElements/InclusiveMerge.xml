@@ -1,0 +1,30 @@
+<CPNElement id="InclusiveMerge">
+    <incomingElements>
+        <incomingElement>s1</incomingElement>
+    </incomingElements>
+    <outgoingElements>
+        <outgoingElement>t1</outgoingElement>
+    </outgoingElements>
+    <places>
+    </places>
+    <transitions>
+        <transition id="t1" x="1" y="1"/>
+    </transitions>
+    <arcs>
+    </arcs>
+    <CPNElements>
+        <CPNElement id="s1" x="0" y="0">
+            <incomingElements>
+                <incomingElement>p1</incomingElement>
+            </incomingElements>
+            <outgoingElements/>
+            <places>
+                <place id="p1" x="0" y="0"/>
+            </places>
+            <transitions/>
+            <arcs>
+                <arc id="a1" from="p1" to="t1"/>
+            </arcs>
+        </CPNElement>
+    </CPNElements>
+</CPNElement>

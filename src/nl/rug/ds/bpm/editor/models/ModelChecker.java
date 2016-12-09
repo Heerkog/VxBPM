@@ -1,0 +1,68 @@
+package nl.rug.ds.bpm.editor.models;
+
+import nl.rug.ds.bpm.editor.Console;
+import nl.rug.ds.bpm.editor.core.configloader.XMLHelper;
+import org.w3c.dom.Node;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * Created by Mark on 10-9-2015.
+ */
+public class ModelChecker {
+    String id;
+    String name;
+    String location;
+    HashMap<String, SpecificationLanguage> specificationLanguages;
+
+    HashMap<String, String> specificationFormats;
+
+    public ModelChecker(Node elemNode, HashMap<String, SpecificationLanguage> specificationLanguages) {
+        this.specificationLanguages = new HashMap<>();
+        this.specificationFormats = new HashMap<>();
+
+        id = XMLHelper.getNodeValue("id", elemNode);
+        name = XMLHelper.getNodeValue("name", elemNode);
+	    location = XMLHelper.getNodeValue("location", elemNode);
+
+        for (Node node : XMLHelper.getChildElements(elemNode, "specificationLanguages")) {
+            String specificationLanguageId = XMLHelper.getNodeValue(node);
+            String format = XMLHelper.getNodeAttr("format", node, "");
+
+            if (!specificationLanguages.containsKey(specificationLanguageId))
+                Console.error("SpecificationLanguages '" + specificationLanguageId + "' not found");
+            SpecificationLanguage specificationLanguage = specificationLanguages.get(specificationLanguageId);
+            this.specificationLanguages.put(specificationLanguageId, specificationLanguage);
+
+            this.specificationFormats.put(specificationLanguageId, format);
+        }
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+	public String getLocation() { return location; }
+
+    public List<SpecificationLanguage> getSpecificationLanguages() {
+        return new ArrayList<>(this.specificationLanguages.values().stream().sorted((p, o) -> p.getName().compareTo(o.getName())).collect(Collectors.toList()));
+    }
+
+
+    public String parseFormula(ConstraintResult constraint) {
+        String typeId = constraint.formula.getTypeName();
+        if (specificationFormats.containsKey(typeId)) {
+            String format = specificationFormats.get(typeId);
+            return format.replace("{c}", constraint.getConverterInput()) + "\n";
+        } else {
+            return typeId + " no available in " + this.getName();
+        }
+    }
+}

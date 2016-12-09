@@ -1,0 +1,210 @@
+<specificationLanguages>
+    <specificationLanguage>
+        <id>CTL</id>
+        <name>CTL</name>
+        <contrains>
+            <!--Prerequisite-->
+            <constrain id="CTL_prerequisite">
+                <arrowId>prerequisite</arrowId>
+                <formulas>
+                    <formula>EF $p -> EF $q</formula>
+                </formulas>
+            </constrain>
+            <!--Exclusion-->
+            <constrain id="CTL_exclusion">
+                <arrowId>exclusion</arrowId>
+                <formulas>
+                    <formula>EF $p -> !EF $q</formula>
+                </formulas>
+            </constrain>
+            <!--Substitution-->
+            <constrain id="CTL_substitution">
+                <arrowId>substitution</arrowId>
+                <formulas>
+                    <formula>!EF $p -> EF $q</formula>
+                </formulas>
+            </constrain>
+            <!--Admittance-->
+            <constrain id="CTL_admittance">
+                <arrowId>admittance</arrowId>
+                <formulas>
+                    <formula>!EF $p -> !EF $q</formula>
+                </formulas>
+            </constrain>
+            <!--Corequisite-->
+            <constrain id="CTL_corequisite">
+                <arrowId>corequisite</arrowId>
+                <formulas>
+                    <formula>(EF $p -> EF $q) &amp; (EF $q -> EF $p)</formula>
+                </formulas>
+            </constrain>
+            <!--ExclusiveChoice-->
+            <constrain id="CTL_exclusiveChoice">
+                <arrowId>exclusiveChoice</arrowId>
+                <formulas>
+                    <formula>(EF $p -> !EF $q) &amp; (EF $q -> !EF $p)</formula>
+                </formulas>
+            </constrain>
+            <!--CausalSelect-->
+            <constrain id="CTL_causalSelect">
+                <arrowId>causalSelect</arrowId>
+                <formulas>
+                    <formula>(EF $p -> EF $q) &amp; (!EF $p -> !EF $q)</formula>
+                </formulas>
+            </constrain>
+            <!--alwaysFinally-->
+            <constrain id="CTL_alwaysFinally">
+                <arrowId>alwaysFinally</arrowId>
+                <formulas>
+                    <formula>AG($p -> AF $q)</formula>
+                </formulas>
+            </constrain>
+            <!--ExistsFinally-->
+            <constrain id="CTL_existsFinally">
+                <arrowId>existsFinally</arrowId>
+                <formulas>
+                    <formula>AG($p -> EF $q)</formula>
+                </formulas>
+            </constrain>
+            <!--AlwaysNext-->
+            <constrain id="CTL_alwaysNext">
+                <arrowId>alwaysNext</arrowId>
+                <formulas>
+                    <formula>AG($p -> A[$p U $q])</formula>
+                </formulas>
+            </constrain>
+            <!--ExistsNext-->
+            <constrain id="CTL_existsNext">
+                <arrowId>existsNext</arrowId>
+                <formulas>
+                    <formula>AG($p -> E[$p U $q])</formula>
+                </formulas>
+            </constrain>
+
+            <!--AlwaysNever-->
+            <constrain id="CTL_alwaysNever">
+                <arrowId>alwaysNever</arrowId>
+                <formulas>
+                    <formula>AG($p -> !AG $q)</formula>
+                </formulas>
+            </constrain>
+            <!--ExistsNever-->
+            <constrain id="CTL_existsNever">
+                <arrowId>existsNever</arrowId>
+                <formulas>
+                    <formula>AG($p -> !EG $q)</formula>
+                </formulas>
+            </constrain>
+            <!--AlwaysNotNext-->
+            <constrain id="CTL_alwaysNotNext">
+                <arrowId>alwaysNotNext</arrowId>
+                <formulas>
+                    <formula>AG($p -> !E[$p U $q])</formula>
+                </formulas>
+            </constrain>
+            <!--ExistsNotNext-->
+            <constrain id="CTL_existsNotNext">
+                <arrowId>existsNotNext</arrowId>
+                <formulas>
+                    <formula>AG($p -> !A[$p U $q])</formula>
+                </formulas>
+            </constrain>
+            <!--Cooccurrence-->
+            <constrain id="CTL_cooccurrence">
+                <arrowId>cooccurrence</arrowId>
+                <formulas>
+                    <formula>AG($p -> EF $q) | AG($q -> EF $p)</formula>
+                </formulas>
+            </constrain>
+            <!--Coexecution-->
+            <constrain id="CTL_coexecution">
+                <arrowId>coexecution</arrowId>
+                <formulas>
+                    <formula>AG($p -> AF $q) | AG($q -> AF $p)</formula>
+                </formulas>
+            </constrain>
+            <!--ParallelExecution-->
+            <constrain id="CTL_parallelExecution">
+                <arrowId>parallelExecution</arrowId>
+                <formulas>
+                    <formula>(EF $p &amp; EF $q)-> EF($p &amp; $q)</formula>
+                </formulas>
+            </constrain>
+            <!--ExclusiveExecution-->
+            <constrain id="CTL_exclusiveExecution">
+                <arrowId>exclusiveExecution</arrowId>
+                <formulas>
+                    <formula>AG($p -> !AG $q) &amp; AG($q -> !AG $p)</formula>
+                </formulas>
+            </constrain>
+
+        </contrains>
+        <objectConstraints>
+            <constrain id="CTL_objectCTLEFp">
+                <arrowId>objectCTLEFp</arrowId>
+                <formulas>
+                    <formula>EF $p</formula>
+                </formulas>
+            </constrain>
+            <constrain id="CTL_objectCTLAFp">
+                <arrowId>objectCTLAFp</arrowId>
+                <formulas>
+                    <formula>AF $p</formula>
+                </formulas>
+            </constrain>
+            <constrain id="CTL_objectCTLAG!p">
+                <arrowId>objectCTLAG!p</arrowId>
+                <formulas>
+                    <formula>AG !$p</formula>
+                </formulas>
+            </constrain>
+            <constrain id="CTL_objectCTLEG!p">
+                <arrowId>objectCTLEG!p</arrowId>
+                <formulas>
+                    <formula>EG !$p</formula>
+                </formulas>
+            </constrain>
+        </objectConstraints>
+    </specificationLanguage>
+    <specificationLanguage>
+        <id>LTL</id>
+        <name>LTL</name>
+        <contrains>
+            <!--alwaysFinally-->
+            <constrain id="LTL_alwaysFinally">
+                <arrowId>alwaysFinally</arrowId>
+                <formulas>
+                    <formula>G($p -> F $q)</formula>
+                </formulas>
+            </constrain>
+        </contrains>
+        <objectConstraints>
+            <constrain id="LTL_objectLTLFp">
+                <arrowId>objectLTLFp</arrowId>
+                <formulas>
+                    <formula>F $p</formula>
+                </formulas>
+            </constrain>
+            <constrain id="LTL_objectLTLG!p">
+                <arrowId>objectLTLG!p</arrowId>
+                <formulas>
+                    <formula>G !$p</formula>
+                </formulas>
+            </constrain>
+        </objectConstraints>
+    </specificationLanguage>
+    <specificationLanguage>
+        <id>justice</id>
+        <name>justice</name>
+        <contrains>
+        </contrains>
+        <objectConstraints>
+            <constrain id="Justice_objectJustice!p">
+                <arrowId>objectJustice!p</arrowId>
+                <formulas>
+                    <formula>!$p</formula>
+                </formulas>
+            </constrain>
+        </objectConstraints>
+    </specificationLanguage>
+</specificationLanguages>

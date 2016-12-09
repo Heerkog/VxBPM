@@ -1,0 +1,14 @@
+<CPNElement id="ExclusiveFork">
+    <incomingElements>
+    </incomingElements>
+    <outgoingElements>
+    </outgoingElements>
+
+    <places>
+    </places>
+    <transitions>
+    </transitions>
+    <arcs>
+    </arcs>
+
+</CPNElement>

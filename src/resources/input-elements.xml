@@ -1,0 +1,429 @@
+<?xml version="1.0"?>
+<inputElements>
+    <inputElement id="startEvent">
+        <name>Start event</name>
+        <CPNElement>startEvent</CPNElement>
+        <BPMNName>startEvent</BPMNName>
+        <width>30</width>
+        <height>30</height>
+        <resizable>false</resizable>
+        <connections minOutgoing="1" maxIncoming="0" maxOutgoing="1"/>
+        <paletIconPath>start-event.png</paletIconPath>
+        <shapePath>start-event.shape</shapePath>
+        <genId visible="false">n{x}</genId>
+        <name visible="true" editable="false">Start</name>
+    </inputElement>
+
+    <inputElement id="endEvent">
+        <name>End event</name>
+        <CPNElement>endEvent</CPNElement>
+        <BPMNName>endEvent</BPMNName>
+        <width>30</width>
+        <height>30</height>
+        <connections minIncoming="1" minOutgoing="0" maxIncoming="1" maxOutgoing="0"/>
+        <paletIconPath>end-event.png</paletIconPath>
+        <shapePath>end-event.shape</shapePath>
+        <genId visible="true">n{x}</genId>
+        <name visible="true" editable="false">End</name>
+        <styleProperties>
+
+        </styleProperties>
+    </inputElement>
+    <inputElement id="activity">
+        <name>Activity</name>
+        <CPNElement>Activity</CPNElement>
+        <BPMNName>activity</BPMNName>
+        <width>60</width>
+        <height>30</height>
+        <connections maxIncoming="1" maxOutgoing="1" minIncoming="1" minOutgoing="1"/>
+        <paletIconPath>Task.png</paletIconPath>
+        <shapePath>Task.shape</shapePath>
+        <styleProperties>
+
+        </styleProperties>
+        <genId>n{x}</genId>
+        <name visible="true" editable="true"></name>
+    </inputElement>
+    <inputElement id="intermediateEvent">
+        <name>In-flow Intermediate catching event</name>
+        <CPNElement>IntermediateEvent</CPNElement>
+        <BPMNName>intermediateEvent</BPMNName>
+        <width>30</width>
+        <height>30</height>
+        <connections maxIncoming="1" maxOutgoing="1" minIncoming="1" minOutgoing="1"/>
+        <paletIconPath>Intermediate-Event.png</paletIconPath>
+        <shapePath>Intermediate-Event.shape</shapePath>
+        <styleProperties>
+
+        </styleProperties>
+        <genId>n{x}</genId>
+        <name visible="true" editable="true"></name>
+    </inputElement>
+    <inputElement id="intermediateThrowingEvent">
+        <name>Intermediate event</name>
+        <CPNElement>Activity</CPNElement>
+        <BPMNName>intermediateThrowingEvent</BPMNName>
+        <width>30</width>
+        <height>30</height>
+        <connections maxIncoming="1" maxOutgoing="1" minIncoming="1" minOutgoing="1"/>
+        <paletIconPath>Intermediate-Event.png</paletIconPath>
+        <shapePath>Intermediate-Event.shape</shapePath>
+        <styleProperties>
+
+        </styleProperties>
+        <genId>n{x}</genId>
+        <name visible="true" editable="true"></name>
+    </inputElement>
+    <inputElement id="group">
+        <name>Group</name>
+        <CPNElement></CPNElement>
+        <BPMNName>group</BPMNName>
+        <groupable>true</groupable>
+        <width>50</width>
+        <height>50</height>
+        <connections maxIncoming="3" maxOutgoing="1" minIncoming="1" minOutgoing="0"/>
+        <paletIconPath>Task.png</paletIconPath>
+        <shapePath>Task.shape</shapePath>
+        <genId>n{x}</genId>
+        <resizable>true</resizable>
+        <name visible="true" editable="true"></name>
+        <styleProperties>
+            <add as="horizontal" value="true"/>
+            <add as="align" value="left"/>
+            <add as="verticalLabelPosition" value="center"/>
+        </styleProperties>
+    </inputElement>
+
+    <inputElement id="_swimlane">
+        <name>Swimlane</name>
+        <CPNElement></CPNElement>
+        <BPMNName>swimlane</BPMNName>
+        <groupable>true</groupable>
+        <width>50</width>
+        <height>50</height>
+        <connections maxIncoming="3" maxOutgoing="1" minIncoming="1" minOutgoing="0"/>
+        <paletIconPath>Swimlane.png</paletIconPath>
+        <shapePath>Task.shape</shapePath>
+        <genId>n{x}</genId>
+        <resizable>true</resizable>
+        <name visible="true" editable="true"></name>
+        <styleProperties>
+            <add as="shape" value="swimlane"/>
+            <add as="horizontal" value="false"/>
+            <add as="align" value="center"/>
+            <add as="verticalLabelPosition" value="center"/>
+        </styleProperties>
+    </inputElement>
+
+    <inputElement id="exclusiveFork">
+        <name>Exclusive Fork</name>
+        <CPNElement>ExclusiveFork</CPNElement>
+        <BPMNName>gateExclusive</BPMNName>
+        <constraints>false</constraints>
+        <width>30</width>
+        <height>30</height>
+        <resizable>false</resizable>
+        <connections maxIncoming="1" minIncoming="1" minOutgoing="1"/>
+        <paletIconPath>Gateway-Exclusive-XOR-Data-Based.png</paletIconPath>
+        <shapePath>Gateway-Exclusive-XOR-Data-Based.shape</shapePath>
+        <styleProperties>
+
+        </styleProperties>
+        <genId>n{x}</genId>
+        <name visible="true" editable="true"></name>
+    </inputElement>
+
+    <inputElement id="parallelFork">
+        <name>Parallel Fork</name>
+        <CPNElement>ParallelFork</CPNElement>
+        <BPMNName>gateParallel</BPMNName>
+        <constraints>false</constraints>
+        <width>30</width>
+        <height>30</height>
+        <resizable>false</resizable>
+        <connections maxIncoming="1"/>
+        <paletIconPath>Gateway-Parallel-AND.png</paletIconPath>
+        <shapePath>Gateway-Parallel-AND.shape</shapePath>
+        <styleProperties>
+        </styleProperties>
+        <genId>n{x}</genId>
+        <name visible="true" editable="true"></name>
+    </inputElement>
+    <inputElement id="deferredChoice">
+        <name>Deferred choice</name>
+        <CPNElement>DeferredChoice</CPNElement>
+        <BPMNName>gateDeferred</BPMNName>
+        <constraints>false</constraints>
+        <width>30</width>
+        <height>30</height>
+        <resizable>false</resizable>
+        <connections maxIncoming="1"/>
+        <paletIconPath>Gateway-Exclusive-XOR-Event-Based.png</paletIconPath>
+        <shapePath>Gateway-Exclusive-XOR-Event-Based.shape</shapePath>
+        <styleProperties>
+        </styleProperties>
+        <genId>n{x}</genId>
+        <name visible="true" editable="true"></name>
+    </inputElement>
+    <inputElement id="complexFork">
+        <name>Complex Fork</name>
+        <CPNElement>ExclusiveFork</CPNElement>
+        <BPMNName>gateComplex</BPMNName>
+        <constraints>false</constraints>
+        <width>30</width>
+        <height>30</height>
+        <resizable>false</resizable>
+        <connections maxIncoming="1"/>
+        <paletIconPath>Gateway-Complex.png</paletIconPath>
+        <shapePath>Gateway-Complex.shape</shapePath>
+        <styleProperties>
+        </styleProperties>
+        <genId>n{x}</genId>
+        <name visible="true" editable="true"></name>
+    </inputElement>
+
+    <inputElement id="exclusiveMerge">
+        <name>Exclusive Merge</name>
+        <CPNElement>ExclusiveMerge</CPNElement>
+        <BPMNName>gateExclusive</BPMNName>
+        <constraints>false</constraints>
+        <width>30</width>
+        <height>30</height>
+        <resizable>false</resizable>
+        <connections maxOutgoing="1" minIncoming="1" minOutgoing="1"/>
+        <paletIconPath>Gateway-Exclusive-XOR-Data-Based.png</paletIconPath>
+        <shapePath>Gateway-Exclusive-XOR-Data-Based.shape</shapePath>
+        <styleProperties>
+
+        </styleProperties>
+        <genId>n{x}</genId>
+        <name visible="true" editable="true"></name>
+    </inputElement>
+
+
+    <inputElementm id="parallelMerge">
+        <name>Parallel Merge</name>
+        <CPNElement>ParallelMerge</CPNElement>
+        <BPMNName>gateParallel</BPMNName>
+        <constraints>false</constraints>
+        <width>30</width>
+        <height>30</height>
+        <resizable>false</resizable>
+        <connections maxOutgoing="1" minIncoming="1" minOutgoing="0"/>
+        <paletIconPath>Gateway-Parallel-AND.png</paletIconPath>
+        <shapePath>Gateway-Parallel-AND.shape</shapePath>
+        <styleProperties>
+        </styleProperties>
+        <genId>n{x}</genId>
+        <name visible="true" editable="true"></name>
+    </inputElementm>
+    <inputElement id="complexMerge">
+        <name>Complex Merge</name>
+        <CPNElement>ComplexMerge2</CPNElement>
+        <BPMNName>startComplex</BPMNName>
+        <constraints>false</constraints>
+        <width>30</width>
+        <height>30</height>
+        <connections maxOutgoing="1" minIncoming="1" minOutgoing="0"/>
+        <paletIconPath>Gateway-Complex.png</paletIconPath>
+        <shapePath>Gateway-Complex.shape</shapePath>
+        <styleProperties>
+        </styleProperties>
+        <genId>n{x}</genId>
+        <name visible="true" editable="true"></name>
+        <attributes>
+            <attribute label="Amount">n</attribute>
+        </attributes>
+    </inputElement>
+    <!-- <inputElement>
+         <paletName>Inclusive Fork</paletName>
+         <CPNElement>InclusiveFork</CPNElement>
+         <BPMNName>inclusive</BPMNName>
+         <constraints>false</constraints>
+         <width>30</width>
+         <height>30</height>
+         <resizable>false</resizable>
+         <connections maxIncoming="3" maxOutgoing="1" minIncoming="1" minOutgoing="0"/>
+         <paletIconPath>Gateway-Inclusive-OR.png</paletIconPath>
+         <shapePath>Gateway-Inclusive-OR.shape</shapePath>
+         <styleProperties>
+
+         </styleProperties>
+         <genId>n{x}</genId>
+         <name visible="true" editable="true"></name>
+     </inputElement>-->
+
+
+    <!--  <inputElement>
+          <paletName>Inclusive Merge</paletName>
+          <CPNElement>InclusiveMerge</CPNElement>
+          <BPMNName>inclusive</BPMNName>
+          <width>15</width>
+          <height>15</height>
+          <resizable>false</resizable>
+          <connections maxIncoming="3" maxOutgoing="1" minIncoming="1" minOutgoing="0"/>
+          <paletIconPath>Gateway-Inclusive-OR.png</paletIconPath>
+          <shapePath>Gateway-Inclusive-OR.shape</shapePath>
+          <styleProperties>
+
+          </styleProperties>
+          <genId>n{x}</genId>
+          <name visible="true" editable="true"></name>
+      </inputElement>-->
+
+
+    <inputElement id="loopWhile">
+        <name>Loop (While)</name>
+        <CPNElement>LoopWhile</CPNElement>
+        <BPMNName>loopWhile</BPMNName>
+        <width>50</width>
+        <height>30</height>
+        <resizable>false</resizable>
+        <connections maxIncoming="1" maxOutgoing="1" minIncoming="1" minOutgoing="0"/>
+        <paletIconPath>Activity-Looping.png</paletIconPath>
+        <shapePath>Activity-Looping.shape</shapePath>
+        <styleProperties>
+        </styleProperties>
+        <genId>n{x}</genId>
+        <name visible="true" editable="true"></name>
+    </inputElement>
+    <inputElement id="loopRepeat">
+        <name>Loop (Repeat)</name>
+        <CPNElement>loopRepeat</CPNElement>
+        <BPMNName>loopRepeat</BPMNName>
+        <width>50</width>
+        <height>30</height>
+        <resizable>false</resizable>
+        <connections maxIncoming="1" maxOutgoing="1" minIncoming="1" minOutgoing="0"/>
+        <paletIconPath>Activity-Looping.png</paletIconPath>
+        <shapePath>Activity-Looping.shape</shapePath>
+        <styleProperties>
+        </styleProperties>
+        <genId>n{x}</genId>
+        <name visible="true" editable="true"></name>
+    </inputElement>
+    <inputElement id="miVariant">
+        <name>MI Variant</name>
+        <CPNElement>miVariant</CPNElement>
+        <BPMNName>miVariant</BPMNName>
+        <width>50</width>
+        <height>30</height>
+        <resizable>false</resizable>
+        <connections maxIncoming="1" maxOutgoing="1" minIncoming="1" minOutgoing="0"/>
+        <paletIconPath>Multiple-Instance-Task.png</paletIconPath>
+        <shapePath>Multiple-Instance-Task.shape</shapePath>
+        <styleProperties>
+        </styleProperties>
+        <genId>n{x}</genId>
+        <name visible="true" editable="true"></name>
+        <attributes>
+            <attribute label="Amount">n</attribute>
+        </attributes>
+    </inputElement>
+
+    <inputElement id="activityIntermediateEventCompensation">
+        <name>Activity with compensation event</name>
+        <CPNElement>Activity</CPNElement>
+        <BPMNName>activityIntermediateEventCompensation</BPMNName>
+        <width>60</width>
+        <height>30</height>
+        <connections maxIncoming="1" maxOutgoing="1" minIncoming="1" minOutgoing="1"/>
+        <paletIconPath>Task.png</paletIconPath>
+        <shapePath>Task.shape</shapePath>
+        <eventInputElementId>intermediateEventCompensation</eventInputElementId>
+        <styleProperties>
+
+        </styleProperties>
+        <genId>n{x}</genId>
+        <name visible="true" editable="true"></name>
+    </inputElement>
+
+    <inputElement id="intermediateEventCompensation">
+        <name>Compensation event</name>
+        <CPNElement>IntermediateEventCompensation</CPNElement>
+        <BPMNName>startEvent</BPMNName>
+        <width>30</width>
+        <height>30</height>
+        <connections minIncoming="1" minOutgoing="0" maxIncoming="1" maxOutgoing="0"/>
+        <paletIconPath>Intermediate-Event-Compensation.png</paletIconPath>
+        <shapePath>Intermediate-Event-Compensation.shape</shapePath>
+        <genId visible="true">n{x}</genId>
+        <name visible="true" editable="false">End</name>
+        <styleProperties>
+
+        </styleProperties>
+    </inputElement>
+
+    <inputElement id="activityError">
+        <name>Activity with Error event</name>
+        <CPNElement>Activity</CPNElement>
+        <BPMNName>activityError</BPMNName>
+        <width>60</width>
+        <height>30</height>
+        <connections maxIncoming="1" maxOutgoing="1" minIncoming="1" minOutgoing="1"/>
+        <paletIconPath>Task.png</paletIconPath>
+        <shapePath>Task.shape</shapePath>
+        <eventInputElementId>intermediateEventError</eventInputElementId>
+        <styleProperties>
+
+        </styleProperties>
+        <genId>n{x}</genId>
+        <name visible="true" editable="true"></name>
+    </inputElement>
+
+    <inputElement id="intermediateEventError">
+        <name>Error</name>
+        <CPNElement>IntermediateEventError</CPNElement>
+        <BPMNName>startEvent</BPMNName>
+        <width>20</width>
+        <height>20</height>
+        <connections maxIncoming="0"/>
+        <paletIconPath>Intermediate-Event-Error.png</paletIconPath>
+        <shapePath>Intermediate-Event-Error.shape</shapePath>
+        <genId visible="true">n{x}</genId>
+    </inputElement>
+
+
+    <inputElement id="message">
+        <name>Message</name>
+        <isEdge>true</isEdge>
+        <CPNElement>MessageEvent</CPNElement>
+        <BPMNName>message</BPMNName>
+        <width>50</width>
+        <height>50</height>
+        <connections maxIncoming="0" maxOutgoing="0" minIncoming="0" minOutgoing="0"/>
+        <paletIconPath>Message-Flow.png</paletIconPath>
+        <shapePath>Task.shape</shapePath>
+        <genId>n{x}</genId>
+        <resizable>true</resizable>
+        <name visible="true" editable="true"></name>
+        <styleProperties>
+            <add as="startArrow" value="oval"/>
+            <add as="startFill" value="false"/>
+            <add as="startSize" value="8"/>
+            <add as="endArrow" value="block"/>
+            <add as="endFill" value="false"/>
+            <add as="endSize" value="8"/>
+            <add as="dashed" value="true"/>
+        </styleProperties>
+    </inputElement>
+
+
+    <inputElement id="startIntermediateEvent">
+        <name>Intermediate catching event</name>
+        <CPNElement>StartIntermediateEvent</CPNElement>
+        <BPMNName>startIntermediateEvent</BPMNName>
+        <width>30</width>
+        <height>30</height>
+        <connections maxIncoming="0" maxOutgoing="1"/>
+        <paletIconPath>Intermediate-Event.png</paletIconPath>
+        <shapePath>Intermediate-Event.shape</shapePath>
+        <styleProperties>
+
+        </styleProperties>
+        <genId>n{x}</genId>
+        <name visible="true" editable="true"></name>
+    </inputElement>
+
+
+</inputElements>

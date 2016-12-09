@@ -1,0 +1,47 @@
+package nl.rug.ds.bpm.editor;
+
+
+import nl.rug.ds.bpm.editor.core.AppCore;
+
+import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
+import java.awt.*;
+
+/**
+ * Created by Mark on 5-5-2015.
+ */
+public class Main extends JFrame {
+
+    private static final long serialVersionUID = -2707712944901661771L;
+
+    static GUIApplication guiApplication;
+    static AppCore appCore;
+
+    public static void main(String[] args) {
+        UIManager.put("ComboBox.background", new ColorUIResource(Color.white));
+
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            //UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        appCore = new AppCore();
+
+
+        JFrame frame = appCore.gui.getFrame();
+        frame.setTitle("FVVBPMT v0.8");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1000, 720);
+        frame.setVisible(true);
+
+    }
+
+    public class SimplelookandfeelExample extends JPanel {
+
+    }
+
+
+}

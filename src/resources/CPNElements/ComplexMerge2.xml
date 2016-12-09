@@ -1,0 +1,48 @@
+<CPNElement id="ComplexMerge2">
+    <incomingElements>
+        <incomingElement>s1</incomingElement>
+    </incomingElements>
+    <outgoingElements>
+        <outgoingElement>t4</outgoingElement>
+    </outgoingElements>
+    <places>
+        <place id="p3" x="2" y="1"/>
+        <place id="p4" x="3" y="2"/>
+        <place id="p5" x="4" y="3"/>
+    </places>
+    <transitions>
+        <transition id="t3" x="2" y="3"/>
+        <transition id="t4" x="4" y="1"/>
+    </transitions>
+    <arcs>
+        <arc id="a6" from="p3" to="t3" weight="{incomingCount}-{n}"/>
+        <arc id="a7" from="p3" to="t4" weight="{n}"/>
+        <arc id="a8" from="p4" to="t4"/>
+        <arc id="a9" from="t3" to="p4"/>
+        <arc id="a10" from="t4" to="p5"/>
+        <arc id="a11" from="p5" to="t3"/>
+    </arcs>
+    <CPNElements>
+        <CPNElement id="s1" x="0" y="0">
+            <incomingElements>
+                <incomingElement>p1</incomingElement>
+            </incomingElements>
+            <outgoingElements/>
+            <places>
+                <place id="p1" x="0" y="1"/>
+            </places>
+            <transitions>
+                <transition id="t1" x="1" y="0"/>
+                <transition id="t2" x="1" y="1"/>
+            </transitions>
+            <arcs>
+                <arc id="a1" from="p1" to="t1"/>
+                <arc id="a2" from="p1" to="t2"/>
+                <arc id="a3" from="t2" to="p3"/>
+                <arc id="a4" from="p4" to="t2"/>
+                <arc id="a5" from="t1" to="p4"/>
+                <arc id="a12" from="p5" to="t1"/>
+            </arcs>
+        </CPNElement>
+    </CPNElements>
+</CPNElement>

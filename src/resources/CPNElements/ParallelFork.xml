@@ -1,0 +1,7 @@
+<CPNElement id="ParallelFork">
+    <incomingElements></incomingElements>
+    <outgoingElements></outgoingElements>
+    <places></places>
+    <transitions></transitions>
+    <arcs></arcs>
+</CPNElement>

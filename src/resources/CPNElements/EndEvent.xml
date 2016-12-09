@@ -1,0 +1,20 @@
+<CPNElement id="endEvent">
+    <incomingElements>
+        <incomingElement>p1</incomingElement>
+    </incomingElements>
+    <outgoingElements>
+
+    </outgoingElements>
+    <places>
+        <place id="p1" x="0" y="0"/>
+        <place id="p2" x="2" y="0"/>
+    </places>
+    <transitions>
+        <transition id="t1" x="1" y="0" name="end"/>
+    </transitions>
+    <arcs>
+
+        <arc id="a1" from="p1" to="t1"/>
+        <arc id="a2" from="t1" to="p2"/>
+    </arcs>
+</CPNElement>

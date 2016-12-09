@@ -1,0 +1,11 @@
+<CPNElement id="Connector">
+    <incomingElements>
+        <incomingElement>p1</incomingElement>
+    </incomingElements>
+    <outgoingElements>
+        <outgoingElement>p1</outgoingElement>
+    </outgoingElements>
+    <places>
+        <place id="p1" x="0" y="0"/>
+    </places>
+</CPNElement>

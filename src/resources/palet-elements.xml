@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<paletElements>
+    <!--Start Event-->
+    <paletElement>
+        <name>Start event</name>
+        <paletIconPath>start-event.png</paletIconPath>
+        <inputElements>
+            <inputElement>startEvent</inputElement>
+        </inputElements>
+    </paletElement>
+    <!--End Event-->
+    <paletElement>
+        <name>End event</name>
+        <paletIconPath>end-event.png</paletIconPath>
+        <inputElements>
+            <inputElement>endEvent</inputElement>
+        </inputElements>
+    </paletElement>
+    <!--Activity-->
+    <paletElement>
+        <name>Activity</name>
+        <paletIconPath>Task.png</paletIconPath>
+        <inputElements>
+            <inputElement>activity</inputElement>
+            <inputElement>loopWhile</inputElement>
+            <inputElement>loopRepeat</inputElement>
+            <inputElement>miVariant</inputElement>
+            <inputElement>activityError</inputElement>
+            <inputElement>activityIntermediateEventCompensation</inputElement>
+
+
+        </inputElements>
+    </paletElement>
+    <!--Group-->
+    <paletElement>
+        <name>Group</name>
+        <paletIconPath>Task.png</paletIconPath>
+        <inputElements>
+
+            <inputElement>group</inputElement>
+            <inputElement>_swimlane</inputElement>
+        </inputElements>
+    </paletElement>
+
+    <!--Fork-->
+    <paletElement>
+        <name>Fork</name>
+        <paletIconPath>Gateway-Exclusive-XOR-Data-Based.png</paletIconPath>
+        <inputElements>
+            <inputElement>exclusiveFork</inputElement>
+            <inputElement>parallelFork</inputElement>
+            <inputElement>deferredChoice</inputElement>
+            <inputElement>complexFork</inputElement>
+        </inputElements>
+    </paletElement>
+
+    <!--Merge-->
+    <paletElement>
+        <name>Merge</name>
+        <paletIconPath>Gateway-Exclusive-XOR-Data-Based.png</paletIconPath>
+        <inputElements>
+            <inputElement>exclusiveMerge</inputElement>
+            <inputElement>parallelMerge</inputElement>
+            <inputElement>complexMerge</inputElement>
+        </inputElements>
+    </paletElement>
+
+    <paletElement>
+        <name>Events</name>
+        <paletIconPath>Intermediate-Event.png</paletIconPath>
+        <inputElements>
+            <!--<inputElement>intermediateEvent</inputElement>-->
+            <inputElement>intermediateThrowingEvent</inputElement>
+            <inputElement>startIntermediateEvent</inputElement>
+
+
+        </inputElements>
+    </paletElement>
+
+    <paletElement>
+        <name>Message</name>
+        <paletIconPath>Message-Flow.png</paletIconPath>
+        <inputElements>
+            <inputElement>message</inputElement>
+        </inputElements>
+    </paletElement>
+
+    <!--<paletElement>
+        <name>Connect</name>
+        <paletIconPath>connect.png</paletIconPath>
+        <inputElements>
+            <inputElement>connectorEdge</inputElement>
+        </inputElements>
+    </paletElement>-->
+
+</paletElements>

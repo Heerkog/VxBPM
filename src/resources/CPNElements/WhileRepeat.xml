@@ -1,0 +1,28 @@
+<CPNElement id="WhileRepeat">
+    <variables>
+        <variable name="W">
+            <value>1</value>
+            <value>0</value>
+        </variable>
+    </variables>
+    <incomingElements>
+        <incomingElement>p1</incomingElement>
+    </incomingElements>
+    <outgoingElements>
+        <outgoingElement>t2</outgoingElement>
+    </outgoingElements>
+    <places>
+        <place id="p1" x="0" y="0.3"/>
+        <place id="p2" x="2.5" y="0.3"/>
+    </places>
+    <transitions>
+        <transition id="t1" x="1" y="0.3"/>
+        <transition id="t2" x="3.5" y="0.3" name="s"/>
+    </transitions>
+    <arcs>
+        <arc id="a1" from="p1" to="t1"/>
+        <arc id="a2" from="t1" to="p1" condition="W == 0" x="1" y="0.4"/>
+        <arc id="a3" from="t1" to="p2" condition="W == 1"/>
+        <arc id="a4" from="p2" to="t2"/>
+    </arcs>
+</CPNElement>

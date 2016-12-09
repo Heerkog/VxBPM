@@ -1,0 +1,19 @@
+<CPNElement id="IntermediateEventCompensation">
+    <incomingElements>
+        <incomingElement>t1</incomingElement>
+    </incomingElements>
+    <outgoingElements>
+        <incomingElement>t2</incomingElement>
+    </outgoingElements>
+    <places>
+        <place id="p1" x="1" y="0.3"/>
+    </places>
+    <transitions>
+        <transition id="t1" x="0" y="0.3"/>
+        <transition id="t2" x="2" y="0.3"/>
+    </transitions>
+    <arcs>
+        <arc id="a1" from="t1" to="p1"/>
+        <arc id="a1" from="p1" to="t2"/>
+    </arcs>
+</CPNElement>

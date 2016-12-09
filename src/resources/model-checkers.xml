@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<modelCheckers>
+    <modelChecker>
+        <id>NuSMV</id>
+        <name>NuSMV</name>
+        <location>D:/Applications/NuSMV-2.5.4-x86_64-w64-mingw32/bin/nusmv.exe</location>
+        <specificationLanguages>
+            <specificationLanguage format="CTLSPEC {c};">CTL</specificationLanguage>
+            <specificationLanguage format="LTLSPEC {c};">LTL</specificationLanguage>
+            <specificationLanguage format="JUSTICE {c};">justice</specificationLanguage>
+        </specificationLanguages>
+    </modelChecker>
+    <ModelChecker>
+        <id>NuXMV</id>
+        <name>NuXMV</name>
+        <location>D:/Applications/nuxmv-1.0.1-win-64/NuXMV.exe</location>
+        <specificationLanguages>
+            <specificationLanguage format="CTLSPEC {c};">CTL</specificationLanguage>
+            <specificationLanguage format="LTLSPEC {c};">justice</specificationLanguage>
+            <specificationLanguage format="JUSTICE {c};">LTL</specificationLanguage>
+        </specificationLanguages>
+    </ModelChecker>
+    <ModelChecker>
+        <id>MCheck</id>
+        <name>MCheck</name>
+        <location>D:/Data/workspace/VxBPM/lib/mch.jar</location>
+        <specificationLanguages>
+            <specificationLanguage format="{c}">CTL</specificationLanguage>
+            <specificationLanguage format="{c}">LTL</specificationLanguage>
+        </specificationLanguages>
+    </ModelChecker>
+</modelCheckers>
