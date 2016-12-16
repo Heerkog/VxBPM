@@ -219,7 +219,6 @@ public class EditorPalette extends JPanel {
 
                 if (inputElement.isEdge()) {
                     InputEdgeCell edge = InputEdgeCell.generateCell(graph,inputElement);
-
                     mxGraphTransferable t = new mxGraphTransferable(new Object[]{edge}, edge.getGeometry());
                     e.startDrag(null, mxSwingConstants.EMPTY_IMAGE, new Point(0,0), t, null);
 
@@ -227,7 +226,7 @@ public class EditorPalette extends JPanel {
                 } else {
                     InputCell cell = InputCell.generateCell(graph, inputElement);
                     mxGraphTransferable t = new mxGraphTransferable(new Object[]{cell}, cell.getGeometry());
-                    e.startDrag(null, mxSwingConstants.EMPTY_IMAGE, new Point(0,0), t, null);
+                    e.startDrag(null, mxSwingConstants.EMPTY_IMAGE, new Point(-10,-10), t, null);
                 }
 
 

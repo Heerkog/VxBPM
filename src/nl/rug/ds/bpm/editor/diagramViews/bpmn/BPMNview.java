@@ -5,10 +5,12 @@ import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.mxGraphOutline;
 import com.mxgraph.util.*;
 import nl.rug.ds.bpm.editor.GUIApplication;
+import nl.rug.ds.bpm.editor.core.configloader.Configloader;
 import nl.rug.ds.bpm.editor.core.enums.EventType;
 import nl.rug.ds.bpm.editor.core.listeners.EventSource;
 import nl.rug.ds.bpm.editor.models.InputElement;
 import nl.rug.ds.bpm.editor.models.graphModels.InputCell;
+import org.wfmc._2008.xpdl2.ApplicationType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -115,7 +117,7 @@ public class BPMNview {
                         InputCell inputCell = (InputCell) cell;
                         JPopupMenu menu = new JPopupMenu();
                         for (InputElement inputElement : inputCell.getInputElement().getPaletElement().getInputElements()) {
-                            ImageIcon image = new ImageIcon(this.getClass().getResource("/nl/rug/editor/resources/inputElements/" + inputElement.getPaletIconPath()));
+                            ImageIcon image = new ImageIcon(Configloader.resourcePath +"inputElements/" + inputElement.getPaletIconPath());
 
                             JMenuItem item = new JMenuItem(inputElement.getName(), image);
                             if (inputElement.getId().equals(inputCell.getInputElement().getId()))

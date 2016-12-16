@@ -41,6 +41,8 @@ public class BPMNGraph extends mxGraph {
 
     public void reset() {
         this.removeCells(this.getChildVertices(this.getDefaultParent()));
+        model.clear();
+        bpmnService = new BPMNService(this, model);
     }
 
     @Override

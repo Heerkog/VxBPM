@@ -32,7 +32,7 @@ public class Main extends JFrame {
 
 
         JFrame frame = appCore.gui.getFrame();
-        frame.setTitle("FVVBPMT v0.8");
+        frame.setTitle("VxBPM v0.8");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 720);
         frame.setVisible(true);

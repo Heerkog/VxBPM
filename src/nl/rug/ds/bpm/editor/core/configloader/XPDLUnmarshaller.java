@@ -31,9 +31,7 @@ public class XPDLUnmarshaller {
 
     @SuppressWarnings("unchecked")
     public XPDLUnmarshaller(File file) {
-
         graph = AppCore.app.gui.getGraph();
-        graph.reset();
         String ext = null;
         int i = file.getName().lastIndexOf('.');
 
@@ -246,9 +244,10 @@ public class XPDLUnmarshaller {
                     points.add(new mxPoint(x, y));
                 }
             }
-
+            System.out.println("UNMARSHALLING TRANSITION");
 
             edge.getGeometry().setPoints(points);
         }
+        else System.out.println("UNMARSHALLING ISSUE MISSING ELEMENT");
     }
 }

@@ -77,7 +77,6 @@ public class BPMNGraphComponent extends mxGraphComponent {
         if (cell instanceof InputLabelCell) {
             cell = (((InputLabelCell) cell).getInputCell());
         }
-        System.out.println(((mxCell) cell).getId());
         super.selectCellForEvent(cell, e);
     }
 

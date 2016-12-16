@@ -25,7 +25,7 @@ public class Configloader {
     private List<PaletElement> paletElements;
 
     public Configloader() {
-        System.out.println(Configloader.resourcePath);
+        System.out.println("RESOURCE PATH " + Configloader.resourcePath);
         loadCPNElements();
         loadInputElement();
         loadPaletElements();

@@ -28,7 +28,7 @@ public class ToolBar extends JToolBar {
         this.setBorder(new LineBorder(Color.LIGHT_GRAY, 1));
 
         addButton("New", null).addActionListener(e -> {
-
+            AppCore.app.clear();
         });
 
         addButton("Open", null).addActionListener(e -> {

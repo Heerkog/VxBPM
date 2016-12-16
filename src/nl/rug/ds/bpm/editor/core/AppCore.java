@@ -6,6 +6,7 @@ import nl.rug.ds.bpm.editor.core.enums.ConstraintType;
 import nl.rug.ds.bpm.editor.core.enums.EventType;
 import nl.rug.ds.bpm.editor.core.listeners.EventSource;
 import nl.rug.ds.bpm.editor.diagramViews.bpmn.BPMNService;
+import nl.rug.ds.bpm.editor.diagramViews.bpmn.BPMNview;
 import nl.rug.ds.bpm.editor.models.Constraint;
 import nl.rug.ds.bpm.editor.models.KripkeStructure;
 import nl.rug.ds.bpm.editor.models.ModelChecker;
@@ -100,9 +101,10 @@ public class AppCore {
     }
 
     public void OpenXPDL() {
+        clear();
+
         JFileChooser fc = new JFileChooser();
         fc.setAcceptAllFileFilterUsed(false);
-
 
         FileNameExtensionFilter vf = new FileNameExtensionFilter("Process/Variant files", "xpdl");
         fc.addChoosableFileFilter(vf);
@@ -150,4 +152,16 @@ public class AppCore {
         }
     }
 
+    public  void clear()
+    {
+        gui.getGraph().reset();
+        gui.getBPMNView().getUndoManager().clear();
+
+        //variables.clear();
+        kripkeStructures.clear();
+        constraints.clear();
+
+        EventSource.fireEvent(EventType.VARIABLES_CHANGED, null);
+        EventSource.fireEvent(EventType.BPMN_REDRAW, null);
+    }
 }
