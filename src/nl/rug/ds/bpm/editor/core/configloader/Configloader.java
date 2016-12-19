@@ -5,6 +5,7 @@ import nl.rug.ds.bpm.editor.Main;
 import nl.rug.ds.bpm.editor.models.*;
 import nl.rug.ds.bpm.editor.transformer.CPNTranformerElement;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import java.io.File;
@@ -110,8 +111,11 @@ public class Configloader {
         if (document != null) {
             Node rootNode = XMLHelper.getRootNode(document);
             for (Node node : XMLHelper.getChildElements(rootNode)) {
-                ModelChecker modelChecker = new ModelChecker(node, specificationLanguages);
-                modelCheckers.add(modelChecker);
+                if(((Element)node).getAttribute("enabled").equals("true"))
+                {
+                    ModelChecker modelChecker = new ModelChecker(node, specificationLanguages);
+                    modelCheckers.add(modelChecker);
+                }
             }
         }
     }

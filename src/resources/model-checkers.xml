@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <modelCheckers>
-    <modelChecker>
+    <modelChecker enabled="true">
         <id>NuSMV</id>
         <name>NuSMV</name>
         <location>D:/Applications/NuSMV-2.5.4-x86_64-w64-mingw32/bin/nusmv.exe</location>
@@ -10,7 +10,7 @@
             <specificationLanguage format="JUSTICE {c};">justice</specificationLanguage>
         </specificationLanguages>
     </modelChecker>
-    <ModelChecker>
+    <ModelChecker enabled="false">
         <id>NuXMV</id>
         <name>NuXMV</name>
         <location>D:/Applications/nuxmv-1.0.1-win-64/NuXMV.exe</location>
@@ -20,7 +20,7 @@
             <specificationLanguage format="JUSTICE {c};">LTL</specificationLanguage>
         </specificationLanguages>
     </ModelChecker>
-    <ModelChecker>
+    <ModelChecker enabled="true">
         <id>MCheck</id>
         <name>MCheck</name>
         <location>D:/Data/workspace/VxBPM/lib/mch.jar</location>

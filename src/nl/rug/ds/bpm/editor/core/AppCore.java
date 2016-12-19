@@ -1,5 +1,6 @@
 package nl.rug.ds.bpm.editor.core;
 
+import com.mxgraph.model.mxGraphModel;
 import nl.rug.ds.bpm.editor.GUIApplication;
 import nl.rug.ds.bpm.editor.core.configloader.*;
 import nl.rug.ds.bpm.editor.core.enums.ConstraintType;
@@ -11,6 +12,7 @@ import nl.rug.ds.bpm.editor.models.Constraint;
 import nl.rug.ds.bpm.editor.models.KripkeStructure;
 import nl.rug.ds.bpm.editor.models.ModelChecker;
 import nl.rug.ds.bpm.editor.models.SpecificationLanguage;
+import nl.rug.ds.bpm.editor.panels.bpmn.BpmnTab;
 import nl.rug.ds.bpm.verification.models.cpn.Variable;
 
 import javax.swing.*;
@@ -154,8 +156,12 @@ public class AppCore {
 
     public  void clear()
     {
+        gui.getGraph().clearSelection();
+        ((mxGraphModel) gui.getGraph().getModel()).clear();
+        //gui.getGraph().removeCells(gui.getGraph().getChildCells(gui.getGraph().getDefaultParent(), true, true));
         gui.getGraph().reset();
         gui.getBPMNView().getUndoManager().clear();
+
 
         //variables.clear();
         kripkeStructures.clear();

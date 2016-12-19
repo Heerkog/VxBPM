@@ -106,5 +106,4 @@ public class BpmnTab extends GenericTab {
     public void fillCenterPanel() {
         centerContainer.add(BPMNview.getView());
     }
-
 }

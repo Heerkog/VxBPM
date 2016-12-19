@@ -207,6 +207,16 @@ public class CellPropertyPanel implements IFormContainer
         });
     }
 
+    public static void addChangeListener(JRadioButtonMenuItem field, ButtonGroup selection, ChangeListener changeListener) {
+        field.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                changeListener.stateChanged(new ChangeEvent(selection.getSelection().getActionCommand()));
+            }
+        });
+    }
+
+
+
     public static void addChangeListener(JTextComponent text, ChangeListener changeListener) {
         Objects.requireNonNull(text);
         Objects.requireNonNull(changeListener);
