@@ -111,11 +111,8 @@ public class Configloader {
         if (document != null) {
             Node rootNode = XMLHelper.getRootNode(document);
             for (Node node : XMLHelper.getChildElements(rootNode)) {
-                if(((Element)node).getAttribute("enabled").equals("true"))
-                {
-                    ModelChecker modelChecker = new ModelChecker(node, specificationLanguages);
-                    modelCheckers.add(modelChecker);
-                }
+                ModelChecker modelChecker = new ModelChecker(node, specificationLanguages);
+                modelCheckers.add(modelChecker);
             }
         }
     }
