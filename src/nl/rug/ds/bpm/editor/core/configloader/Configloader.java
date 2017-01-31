@@ -8,7 +8,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +22,6 @@ import java.util.List;
  * Created by Mark on 29-6-2015.
  */
 public class Configloader {
-    public final static String resourcePath = Main.class.getResource("../../../../../resources/").getPath();//"./src/resources/";
     private HashMap<String, InputElement> inputElements;
     private HashMap<String, CPNTranformerElement> cpnTranformerElements;
     private HashMap<String, Arrow> arrows;
@@ -26,7 +30,6 @@ public class Configloader {
     private List<PaletElement> paletElements;
 
     public Configloader() {
-        System.out.println("RESOURCE PATH " + Configloader.resourcePath);
         loadCPNElements();
         loadInputElement();
         loadPaletElements();
@@ -37,7 +40,7 @@ public class Configloader {
 
     private void loadInputElement() {
         inputElements = new HashMap<>();
-        Document document = XMLHelper.LoadXMLFromFile(resourcePath + "input-elements.xml");
+        Document document = XMLHelper.LoadXMLFromFile(Main.class.getResourceAsStream("/resources/input-elements.xml"));
         if (document != null) {
             Node rootNode = XMLHelper.getRootNode(document);
             for (Node node : XMLHelper.getChildElements(rootNode)) {
@@ -55,7 +58,7 @@ public class Configloader {
 
     private void loadPaletElements() {
         paletElements = new ArrayList<>();
-        Document document = XMLHelper.LoadXMLFromFile(resourcePath + "palet-elements.xml");
+        Document document = XMLHelper.LoadXMLFromFile(Main.class.getResourceAsStream("/resources/palet-elements.xml"));
         if (document != null) {
             Node rootNode = XMLHelper.getRootNode(document);
             for (Node node : XMLHelper.getChildElements(rootNode)) {
@@ -67,23 +70,21 @@ public class Configloader {
 
     private void loadCPNElements() {
         cpnTranformerElements = new HashMap<>();
-        try {
-            File folder = new File(resourcePath + "cpnElements");
-            for (final File fileEntry : folder.listFiles()) {
-                Document document = XMLHelper.LoadXMLFromFile(fileEntry);
-                Node rootNode = XMLHelper.getRootNode(document);
-                CPNTranformerElement element = new CPNTranformerElement(rootNode);
+        Document document = XMLHelper.LoadXMLFromFile(Main.class.getResourceAsStream("/resources/cpn-elements.xml"));
+        if (document != null) {
+            Node rootNode = XMLHelper.getRootNode(document);
+            for (Node node : XMLHelper.getChildElements(rootNode)) {
+                Document doc = XMLHelper.LoadXMLFromFile(Main.class.getResourceAsStream("/resources/CPNElements/" + XMLHelper.getNodeValue(node) + ".xml"));
+                Node r = XMLHelper.getRootNode(doc);
+                CPNTranformerElement element = new CPNTranformerElement(r);
                 cpnTranformerElements.put(element.getId(), element);
             }
-        } catch (Exception e) {
-            Console.error(e.getMessage());
-            e.printStackTrace();
         }
     }
 
     private void loadArrows() {
         arrows = new HashMap<>();
-        Document document = XMLHelper.LoadXMLFromFile(resourcePath + "arrows.xml");
+        Document document = XMLHelper.LoadXMLFromFile(Main.class.getResourceAsStream("/resources/arrows.xml"));
         if (document != null) {
             Node rootNode = XMLHelper.getRootNode(document);
             for (Node node : XMLHelper.getChildElements(rootNode)) {
@@ -95,7 +96,7 @@ public class Configloader {
 
     private void loadSpecificationLanguages() {
         specificationLanguages = new HashMap<>();
-        Document document = XMLHelper.LoadXMLFromFile(resourcePath + "specification-languages.xml");
+        Document document = XMLHelper.LoadXMLFromFile(Main.class.getResourceAsStream("/resources/specification-languages.xml"));
         if (document != null) {
             Node rootNode = XMLHelper.getRootNode(document);
             for (Node node : XMLHelper.getChildElements(rootNode)) {
@@ -107,7 +108,7 @@ public class Configloader {
 
     private void loadModelCheckers() {
         modelCheckers = new ArrayList<>();
-        Document document = XMLHelper.LoadXMLFromFile(resourcePath + "model-checkers.xml");
+        Document document = XMLHelper.LoadXMLFromFile(Main.class.getResourceAsStream("/resources/model-checkers.xml"));
         if (document != null) {
             Node rootNode = XMLHelper.getRootNode(document);
             for (Node node : XMLHelper.getChildElements(rootNode)) {

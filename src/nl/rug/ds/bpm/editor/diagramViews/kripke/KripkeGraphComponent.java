@@ -4,10 +4,15 @@ import com.mxgraph.io.mxCodec;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxUtils;
 import com.mxgraph.view.mxGraph;
+import nl.rug.ds.bpm.editor.Main;
 import nl.rug.ds.bpm.editor.core.configloader.Configloader;
 import org.w3c.dom.Document;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Created by Mark Kloosterhuis.
@@ -33,9 +38,13 @@ public class KripkeGraphComponent extends mxGraphComponent {
 
 
         mxCodec codec = new mxCodec();
-        Document doc = mxUtils.loadDocument(Configloader.resourcePath + "/cpn-style.xml");
-
-        codec.decode(doc.getDocumentElement(), graph.getStylesheet());
+        try {
+            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document doc = documentBuilder.parse(Main.class.getResourceAsStream("/resources/cpn-style.xml"));
+            codec.decode(doc.getDocumentElement(), graph.getStylesheet());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         // Sets the background to white

@@ -30,11 +30,15 @@ public class Main extends JFrame {
 
         appCore = new AppCore();
 
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = (int)screenSize.getWidth();
+        int height = (int)screenSize.getHeight();
 
         JFrame frame = appCore.gui.getFrame();
         frame.setTitle("VxBPM v0.8");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 720);
+        frame.setLocation((width-1000)/2, (height-720)/2);
         frame.setVisible(true);
 
     }

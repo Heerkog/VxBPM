@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<CPNElements>
+    <CPNElement>Connector</CPNElement>
+    <CPNElement>Activity</CPNElement>
+    <CPNElement>WhileLoop</CPNElement>
+    <CPNElement>WhileRepeat</CPNElement>
+    <CPNElement>StartEvent</CPNElement>
+    <CPNElement>IntermediateEvent</CPNElement>
+    <CPNElement>IntermediateEventCompensation</CPNElement>
+    <CPNElement>IntermediateEventError</CPNElement>
+    <CPNElement>MessageEvent</CPNElement>
+    <CPNElement>StartIntermediateEvent</CPNElement>
+    <CPNElement>EndEvent</CPNElement>
+    <CPNElement>DeferredChoice</CPNElement>
+    <CPNElement>ExclusiveFork</CPNElement>
+    <CPNElement>ParallelFork</CPNElement>
+    <CPNElement>InclusiveFork</CPNElement>
+    <CPNElement>ExclusiveMerge</CPNElement>
+    <CPNElement>ParallelMerge</CPNElement>
+    <CPNElement>InclusiveMerge</CPNElement>
+    <CPNElement>ComplexMerge2</CPNElement>
+    <CPNElement>miVariant</CPNElement>
+</CPNElements>

@@ -1,6 +1,7 @@
 package nl.rug.ds.bpm.verification.modelCheckers;
 
 import nl.rug.ds.bpm.editor.Console;
+import nl.rug.ds.bpm.editor.core.configloader.Configloader;
 import nl.rug.ds.bpm.editor.core.enums.ConstraintStatus;
 import nl.rug.ds.bpm.editor.models.ConstraintResult;
 import nl.rug.ds.bpm.editor.models.ModelChecker;
@@ -16,7 +17,7 @@ public class MChecker extends AbstractChecker {
     public MChecker(ModelChecker checkerSettings) {
         super("MCheck");
         this.checkerSettings = checkerSettings;
-        checkerPath = checkerSettings.getLocation();
+        checkerPath = "../../../../../mch.jar";    //checkerSettings.getLocation();
         inputChecker = new StringBuilder();
     }
 

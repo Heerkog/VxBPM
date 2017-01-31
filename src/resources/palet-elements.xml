@@ -3,7 +3,7 @@
     <!--Start Event-->
     <paletElement>
         <name>Start event</name>
-        <paletIconPath>start-event.png</paletIconPath>
+        <paletIconPath>Start-Event.png</paletIconPath>
         <inputElements>
             <inputElement>startEvent</inputElement>
         </inputElements>
@@ -11,7 +11,7 @@
     <!--End Event-->
     <paletElement>
         <name>End event</name>
-        <paletIconPath>end-event.png</paletIconPath>
+        <paletIconPath>End-Event.png</paletIconPath>
         <inputElements>
             <inputElement>endEvent</inputElement>
         </inputElements>

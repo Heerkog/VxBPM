@@ -3,6 +3,7 @@ package nl.rug.ds.bpm.editor.panels.bpmn;
 import com.mxgraph.canvas.mxGraphics2DCanvas;
 import com.mxgraph.shape.mxStencilShape;
 import com.mxgraph.util.mxUtils;
+import nl.rug.ds.bpm.editor.Main;
 import nl.rug.ds.bpm.editor.core.AppCore;
 import nl.rug.ds.bpm.editor.core.configloader.Configloader;
 import nl.rug.ds.bpm.editor.core.enums.EventType;
@@ -15,8 +16,10 @@ import nl.rug.ds.bpm.editor.models.graphModels.SuperCell;
 import nl.rug.ds.bpm.editor.panels.bpmn.cellProperty.CellPropertyPanel;
 import nl.rug.ds.bpm.editor.panels.genericViews.GenericTab;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 
 /**
  * Created by Mark on 28-12-2015.
@@ -46,17 +49,16 @@ public class BpmnTab extends GenericTab {
             editorPallete.addInputElement(element);
         }
 
-
         try {
-            String nodeXml = mxUtils.readFile(Configloader.resourcePath + "/inputElements/Start-Event-Link.shape");//TODO CHECK
+            String nodeXml = mxUtils.readInputStream(Main.class.getResourceAsStream("/resources/inputElements/Start-Event-Link.shape"));
             mxStencilShape newShape = new mxStencilShape(nodeXml);
             mxGraphics2DCanvas.putShape("TESTLINK", newShape);
+            editorPallete.addEdgeTemplate("Connector", new ImageIcon(ImageIO.read(Main.class.getResourceAsStream("/resources/images/connect.png"))), "entity", 100, 100, "connector");
+            editorPallete.addRelationEdgeTemplate("Constraint", new ImageIcon(ImageIO.read(Main.class.getResourceAsStream("/resources/images/connect.png"))), "entity", 100, 100, "connector");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        editorPallete.addEdgeTemplate("Connector", new ImageIcon(Configloader.resourcePath + "/images/connect.png"), "entity", 100, 100, "connector");
-        editorPallete.addRelationEdgeTemplate("Constraint", new ImageIcon(Configloader.resourcePath + "/images/connect.png"), "entity", 100, 100, "connector");
 
     }
 

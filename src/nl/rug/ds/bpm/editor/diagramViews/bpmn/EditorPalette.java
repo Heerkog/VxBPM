@@ -20,6 +20,7 @@ import nl.rug.ds.bpm.editor.models.graphModels.EdgeCell;
 import nl.rug.ds.bpm.editor.models.graphModels.InputCell;
 import nl.rug.ds.bpm.editor.models.graphModels.InputEdgeCell;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
@@ -29,6 +30,7 @@ import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
 import java.util.UUID;
 
 
@@ -136,7 +138,7 @@ public class EditorPalette extends JPanel {
     public void createInputShapes(java.util.List<InputElement> inputElements) {
         for (InputElement inputElement : inputElements) {
             try {
-                String nodeXml = mxUtils.readFile(Main.class.getResource("/resources/inputElements/" + inputElement.getShapePath()).getPath());//TODO CHECK
+                String nodeXml = mxUtils.readInputStream(Main.class.getResourceAsStream("/resources/inputElements/" + inputElement.getShapePath()));
                 mxStencilShape newShape = new mxStencilShape(nodeXml);
                 mxGraphics2DCanvas.putShape(inputElement.getId(), newShape);
             } catch (Exception e) {
@@ -149,7 +151,7 @@ public class EditorPalette extends JPanel {
         try {
             if (paletElement.getInputElements().size() > 0) {
                 final InputElement inputElement = paletElement.getInputElements().get(0);
-                ImageIcon image = new ImageIcon(Main.class.getResource("/resources/inputElements/" + paletElement.getPaletIconPath()).getPath());
+                ImageIcon image = new ImageIcon(ImageIO.read(Main.class.getResourceAsStream("/resources/inputElements/" + paletElement.getPaletIconPath())));
                 JLabel entry = createEntry(paletElement.getName(), image);
 
                 addCell(entry, inputElement);
