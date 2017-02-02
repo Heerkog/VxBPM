@@ -20,7 +20,7 @@ import java.awt.*;
  * Created by Mark Kloosterhuis.
  */
 public class GUIApplication {
-    JFrame frame;
+    public JFrame frame;
     public ToolBar toolbar;
     public ConsoleTab consoleTab;
     public BpmnTab bpmnTab;
@@ -107,7 +107,7 @@ public class GUIApplication {
         tabbedPane.addTab("Kripke Structure", kripkeTab.getPanel());
         tabbedPane.addTab("Raw Input", rawInputTab.getPanel());
         tabbedPane.addTab("Raw Output", rawOutputTab.getPanel());
-        tabbedPane.addTab("Constrains results", constraintsConsoleTab.getPanel());
+        tabbedPane.addTab("Verification results", constraintsConsoleTab.getPanel());
         tabbedPane.addChangeListener(e -> {
             EventSource.fireEvent(EventType.CONSOLE_TABVIEW_CHANGED, tabbedPane.getSelectedIndex());
         });

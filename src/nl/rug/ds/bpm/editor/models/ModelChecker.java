@@ -52,8 +52,12 @@ public class ModelChecker {
     }
 
 	public String getLocation() { return location; }
-	
+
+	public void setLocation(String location) { this.location = location; }
+
 	public boolean isEnabled() { return enabled; }
+
+	public void setEnabled(boolean enabled) { this.enabled = enabled; }
 
     public List<SpecificationLanguage> getSpecificationLanguages() {
         return new ArrayList<>(this.specificationLanguages.values().stream().sorted((p, o) -> p.getName().compareTo(o.getName())).collect(Collectors.toList()));
@@ -72,7 +76,7 @@ public class ModelChecker {
     
     public String toXML() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\t<modelChecher enabled=\"" + enabled + "\">\n");
+        sb.append("\t<modelChecker enabled=\"" + enabled + "\">\n");
         sb.append("\t\t<id>" + id + "</id>\n");
         sb.append("\t\t<name>" + name + "</name>\n");
         sb.append("\t\t<location>" + location + "</location>\n");
@@ -84,6 +88,7 @@ public class ModelChecker {
         }
         
         sb.append("\t\t</specificationLanguages>\n");
+        sb.append("\t</modelChecker>\n");
         
         return sb.toString();
     }
