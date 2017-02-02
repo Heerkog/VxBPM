@@ -5,15 +5,11 @@ import nl.rug.ds.bpm.editor.Main;
 import nl.rug.ds.bpm.editor.models.*;
 import nl.rug.ds.bpm.editor.transformer.CPNTranformerElement;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -108,15 +104,24 @@ public class Configloader {
 
     private void loadModelCheckers() {
         modelCheckers = new ArrayList<>();
-        Document document = XMLHelper.LoadXMLFromFile(Main.class.getResourceAsStream("/resources/model-checkers.xml"));
+        Document document = null;
+        File file = new File(System.getProperty("user.home") + "/VxBPM/model-checkers.xml");
+
+        if(file.exists()) {
+            try {
+                document = XMLHelper.LoadXMLFromFile(new FileInputStream(file));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        else
+            document = XMLHelper.LoadXMLFromFile(Main.class.getResourceAsStream("/resources/model-checkers.xml"));
+
         if (document != null) {
             Node rootNode = XMLHelper.getRootNode(document);
             for (Node node : XMLHelper.getChildElements(rootNode)) {
-                if(((Element)node).getAttribute("enabled").equals("true"))
-                {
-                    ModelChecker modelChecker = new ModelChecker(node, specificationLanguages);
-                    modelCheckers.add(modelChecker);
-                }
+                ModelChecker modelChecker = new ModelChecker(node, specificationLanguages);
+                modelCheckers.add(modelChecker);
             }
         }
     }

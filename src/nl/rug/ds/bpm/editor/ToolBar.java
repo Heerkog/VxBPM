@@ -10,8 +10,6 @@ import nl.rug.ds.bpm.editor.panels.bpmn.cellProperty.CellPropertyPanel;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +21,7 @@ public class ToolBar extends JMenuBar {
     mxGraphComponent graphComponent;
     ButtonGroup checkerGroup;
     JCheckBoxMenuItem autocheck, fullAutoput;
+    JMenu verificationMenu;
 
     public ToolBar(final GUIApplication editor) {
         BPMNEditorActions.BPMNview = editor.getBPMNView();
@@ -30,28 +29,34 @@ public class ToolBar extends JMenuBar {
 
         JMenu fileMenu = new JMenu("File");
         JMenu editMenu = new JMenu("Edit");
-        JMenu verificationMenu = new JMenu("Verification");
 
         this.add(fileMenu);
         this.add(editMenu);
-        this.add(verificationMenu);
 
         addMenuItem(fileMenu, "New", null).addActionListener(e -> {
             AppCore.app.clear();
         });
-        addMenuItem(fileMenu,"Open", null).addActionListener(e -> {
+        addMenuItem(fileMenu, "Open", null).addActionListener(e -> {
             AppCore.app.OpenXPDL();
         });
-        addMenuItem(fileMenu,"Save", null).addActionListener(e -> {
+        addMenuItem(fileMenu, "Save", null).addActionListener(e -> {
             AppCore.app.saveXPDL();
         });
         addMenuItem(fileMenu, "Exit", null).addActionListener(e -> {
             System.exit(0);
         });
 
-        addMenuItem(editMenu,"Undo", null).addActionListener(new BPMNEditorActions.HistoryAction(true));
-        addMenuItem(editMenu,"Redo", null).addActionListener(new BPMNEditorActions.HistoryAction(false));
+        addMenuItem(editMenu, "Undo", null).addActionListener(new BPMNEditorActions.HistoryAction(true));
+        addMenuItem(editMenu, "Redo", null).addActionListener(new BPMNEditorActions.HistoryAction(false));
 
+        verificationMenu = new JMenu("Verification");
+        this.add(verificationMenu);
+        buildVerificationMenu();
+    }
+
+    public void buildVerificationMenu()
+    {
+        verificationMenu.removeAll();
 
         JMenuItem checkModel  = new JMenuItem("Verify");
         checkModel.setBorderPainted(false);
@@ -69,15 +74,17 @@ public class ToolBar extends JMenuBar {
 
         checkerGroup = new ButtonGroup();
         AppCore.app.config.getModelCheckers().forEach((item) -> {
-            JRadioButtonMenuItem checker = new JRadioButtonMenuItem(item.getName(), true);
-            checker.setActionCommand(item.getId());
-            verificationMenu.add(checker);
-            checkerGroup.add(checker);
-            CellPropertyPanel.addChangeListener(checker, checkerGroup, e -> {
-                EventSource.fireEvent(EventType.MODEL_CHECKER_CHANGE, AppCore.app.config.getModelCheckers().stream().filter(
-                        modelChecker -> modelChecker.getId().equals(checkerGroup.getSelection().getActionCommand())
-                ).findFirst().get());
-            });
+            if(item.isEnabled()) {
+                JRadioButtonMenuItem checker = new JRadioButtonMenuItem(item.getName(), true);
+                checker.setActionCommand(item.getId());
+                verificationMenu.add(checker);
+                checkerGroup.add(checker);
+                CellPropertyPanel.addChangeListener(checker, checkerGroup, e -> {
+                    EventSource.fireEvent(EventType.MODEL_CHECKER_CHANGE, AppCore.app.config.getModelCheckers().stream().filter(
+                            modelChecker -> modelChecker.getId().equals(checkerGroup.getSelection().getActionCommand())
+                    ).findFirst().get());
+                });
+            }
         });
 
         verificationMenu.addSeparator();
@@ -95,6 +102,12 @@ public class ToolBar extends JMenuBar {
             }
         });
         verificationMenu.add(fullAutoput);
+
+        verificationMenu.addSeparator();
+
+        addMenuItem(verificationMenu, "Settings", null).addActionListener(e -> {
+            OptionsDialog od = new OptionsDialog(AppCore.gui.frame);
+        });
     }
 
     public boolean isFullOutput() {

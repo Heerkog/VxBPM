@@ -1,13 +1,15 @@
 package nl.rug.ds.bpm.verification.modelCheckers;
 
 import nl.rug.ds.bpm.editor.Console;
-import nl.rug.ds.bpm.editor.core.configloader.Configloader;
+import nl.rug.ds.bpm.editor.Main;
 import nl.rug.ds.bpm.editor.core.enums.ConstraintStatus;
 import nl.rug.ds.bpm.editor.models.ConstraintResult;
 import nl.rug.ds.bpm.editor.models.ModelChecker;
 import nl.rug.ds.bpm.verification.models.kripke.State;
 
 import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class MChecker extends AbstractChecker {
     public MChecker(ModelChecker checkerSettings) {
         super("MCheck");
         this.checkerSettings = checkerSettings;
-        checkerPath = "../../../../../mch.jar";    //checkerSettings.getLocation();
+        checkerPath = "/mch.jar";    //checkerSettings.getLocation();
         inputChecker = new StringBuilder();
     }
 
@@ -64,11 +66,18 @@ public class MChecker extends AbstractChecker {
 
     protected Process createProcess() {
         try {
-            File location = new File(checkerPath);
-            Process proc = Runtime.getRuntime().exec("java -jar " + location.getAbsoluteFile() + " " + file.getAbsolutePath());
+            File jar = new File(System.getProperty("user.home") + "/VxBPM/mch.jar");
+            if (!jar.exists()) {
+                jar.getParentFile().mkdirs();
+                InputStream link = (Main.class.getResourceAsStream(checkerPath));
+                Files.copy(link, jar.getAbsoluteFile().toPath());
+                jar.deleteOnExit();
+            }
+
+            Process proc = Runtime.getRuntime().exec("java -jar " + jar.getAbsoluteFile() + " " + file.getAbsolutePath());
             return proc;
         } catch (Throwable t) {
-            //t.printStackTrace();
+            t.printStackTrace();
             outputChecker.append("WARNING: Could not callModelChecker NuSMV2.\n");
             outputChecker.append("WARNING: No checks were performed.\n");
             return null;
