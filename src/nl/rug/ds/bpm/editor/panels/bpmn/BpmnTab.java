@@ -5,7 +5,6 @@ import com.mxgraph.shape.mxStencilShape;
 import com.mxgraph.util.mxUtils;
 import nl.rug.ds.bpm.editor.Main;
 import nl.rug.ds.bpm.editor.core.AppCore;
-import nl.rug.ds.bpm.editor.core.configloader.Configloader;
 import nl.rug.ds.bpm.editor.core.enums.EventType;
 import nl.rug.ds.bpm.editor.core.listeners.EventSource;
 import nl.rug.ds.bpm.editor.diagramViews.bpmn.BPMNGraph;
@@ -19,7 +18,6 @@ import nl.rug.ds.bpm.editor.panels.genericViews.GenericTab;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.net.URL;
 
 /**
  * Created by Mark on 28-12-2015.

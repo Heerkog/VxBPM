@@ -19,7 +19,7 @@ public class MChecker extends AbstractChecker {
     public MChecker(ModelChecker checkerSettings) {
         super("MCheck");
         this.checkerSettings = checkerSettings;
-        checkerPath = "/mch.jar";    //checkerSettings.getLocation();
+        checkerPath = "/lib/mch.jar";    //checkerSettings.getLocation();
         inputChecker = new StringBuilder();
     }
 

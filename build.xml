@@ -6,7 +6,6 @@
 	<property name="dir.build.artifacts">${dir.build}/artifacts/VxBPM</property>
 	<property name="file.jar">${dir.build.artifacts}/VxBPM-${version}.jar</property>
 	
-	
 	<path id="projectClasspath">
 		<fileset dir="lib">
 			<include name="jgraphx.jar"/>
@@ -28,7 +27,7 @@
 			<fileset dir="${dir.src}/resources"/>
 		</copy>
 		
-		<copy file="lib/mch.jar" tofile="${dir.build.production}/mch.jar"/>
+		<copy file="lib/mch.jar" tofile="${dir.build.production}/lib/mch.jar"/>
 	</target>
 	
 	

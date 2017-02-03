@@ -1,26 +1,19 @@
 package nl.rug.ds.bpm.editor.diagramViews.bpmn;
 
 import com.mxgraph.io.mxCodec;
-import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.util.mxUtils;
 import com.mxgraph.view.mxGraph;
 import nl.rug.ds.bpm.editor.Main;
-import nl.rug.ds.bpm.editor.core.configloader.Configloader;
 import nl.rug.ds.bpm.editor.models.graphModels.InputLabelCell;
 import nl.rug.ds.bpm.editor.models.graphModels.SuperCell;
 import org.w3c.dom.Document;
 
-import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * Created by Mark Kloosterhuis.

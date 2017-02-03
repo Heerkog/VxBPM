@@ -2,17 +2,13 @@ package nl.rug.ds.bpm.editor.diagramViews.cpn;
 
 import com.mxgraph.io.mxCodec;
 import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.util.mxUtils;
 import com.mxgraph.view.mxGraph;
 import nl.rug.ds.bpm.editor.Main;
-import nl.rug.ds.bpm.editor.core.configloader.Configloader;
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.*;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * Created by Mark Kloosterhuis.
