@@ -117,7 +117,7 @@ public class BPMNview {
                         InputCell inputCell = (InputCell) cell;
                         JPopupMenu menu = new JPopupMenu();
                         for (InputElement inputElement : inputCell.getInputElement().getPaletElement().getInputElements()) {
-                            ImageIcon image = new ImageIcon(Configloader.resourcePath +"inputElements/" + inputElement.getPaletIconPath());
+                            ImageIcon image = new ImageIcon("../../../../../resources/inputElements/" + inputElement.getPaletIconPath());
 
                             JMenuItem item = new JMenuItem(inputElement.getName(), image);
                             if (inputElement.getId().equals(inputCell.getInputElement().getId()))

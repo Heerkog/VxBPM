@@ -1,0 +1,55 @@
+<project name="VxBPM" basedir=".">
+	<property name="version">1.0.0</property>
+	<property name="dir.src">src</property>
+	<property name="dir.build">out</property>
+	<property name="dir.build.production">${dir.build}/production/VxBPM</property>
+	<property name="dir.build.artifacts">${dir.build}/artifacts/VxBPM</property>
+	<property name="file.jar">${dir.build.artifacts}/VxBPM-${version}.jar</property>
+	
+	
+	<path id="projectClasspath">
+		<fileset dir="lib">
+			<include name="jgraphx.jar"/>
+			<include name="mvel2-2.2.0.Final.jar"/>
+		</fileset>
+	</path>
+	
+	<target name="clean">
+		<delete dir="${dir.build}"/>
+	</target>
+	
+	
+	<target name="init">
+		<mkdir dir="${dir.build}"/>
+		<mkdir dir="${dir.build.production}"/>
+		<mkdir dir="${dir.build.artifacts}"/>
+		
+		<copy todir="${dir.build.production}/resources">
+			<fileset dir="${dir.src}/resources"/>
+		</copy>
+		
+		<copy file="lib/mch.jar" tofile="${dir.build.production}/mch.jar"/>
+	</target>
+	
+	
+	<target name="compile" depends="init">
+		<echo>Compiling Java source</echo>
+		
+		<javac classpathref="projectClasspath"
+			   srcdir="${dir.src}"
+			   destdir="${dir.build.production}" />
+	</target>
+	
+	<target name="jar" depends="compile">
+		<echo>Making JAR file</echo>
+		
+		<jar basedir="${dir.build.production}"
+			 file="${file.jar}">
+			<zipgroupfileset dir="lib" includes="jgraphx.jar"/>
+			<zipgroupfileset dir="lib" includes="mvel2-2.2.0.Final.jar"/>
+			<manifest>
+				<attribute name="Main-Class" value="nl.rug.ds.bpm.editor.Main"/>
+			</manifest>
+		</jar>
+	</target>
+</project>

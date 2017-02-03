@@ -7,12 +7,10 @@ import nl.rug.ds.bpm.editor.core.enums.ConstraintType;
 import nl.rug.ds.bpm.editor.core.enums.EventType;
 import nl.rug.ds.bpm.editor.core.listeners.EventSource;
 import nl.rug.ds.bpm.editor.diagramViews.bpmn.BPMNService;
-import nl.rug.ds.bpm.editor.diagramViews.bpmn.BPMNview;
 import nl.rug.ds.bpm.editor.models.Constraint;
 import nl.rug.ds.bpm.editor.models.KripkeStructure;
 import nl.rug.ds.bpm.editor.models.ModelChecker;
 import nl.rug.ds.bpm.editor.models.SpecificationLanguage;
-import nl.rug.ds.bpm.editor.panels.bpmn.BpmnTab;
 import nl.rug.ds.bpm.verification.models.cpn.Variable;
 
 import javax.swing.*;
@@ -165,7 +163,7 @@ public class AppCore {
 
         //variables.clear();
         kripkeStructures.clear();
-        constraints.clear();
+        //constraints.clear();
 
         EventSource.fireEvent(EventType.VARIABLES_CHANGED, null);
         EventSource.fireEvent(EventType.BPMN_REDRAW, null);

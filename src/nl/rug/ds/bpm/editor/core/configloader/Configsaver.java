@@ -19,7 +19,7 @@ public class Configsaver {
 	
 	public void saveModelCheckers(List<ModelChecker> modelCheckers)
 	{
-		File file = new File(home + "VxBPM/model-checkers.xml");
+		File file = new File(home + "/VxBPM/model-checkers.xml");
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("<?xml version=\"1.0\"?>\n" +
@@ -30,8 +30,11 @@ public class Configsaver {
 		
 		try {
 			if(!file.exists())
+			{
+				file.getParentFile().mkdirs();
 				file.createNewFile();
-			
+			}
+
 			PrintWriter writer = new PrintWriter(file, "UTF-8");
 			writer.println(sb.toString());
 			writer.close();

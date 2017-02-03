@@ -8,8 +8,8 @@
         <height>30</height>
         <resizable>false</resizable>
         <connections minOutgoing="1" maxIncoming="0" maxOutgoing="1"/>
-        <paletIconPath>start-event.png</paletIconPath>
-        <shapePath>start-event.shape</shapePath>
+        <paletIconPath>Start-Event.png</paletIconPath>
+        <shapePath>Start-Event.shape</shapePath>
         <genId visible="false">n{x}</genId>
         <name visible="true" editable="false">Start</name>
     </inputElement>
@@ -21,8 +21,8 @@
         <width>30</width>
         <height>30</height>
         <connections minIncoming="1" minOutgoing="0" maxIncoming="1" maxOutgoing="0"/>
-        <paletIconPath>end-event.png</paletIconPath>
-        <shapePath>end-event.shape</shapePath>
+        <paletIconPath>End-Event.png</paletIconPath>
+        <shapePath>End-Event.shape</shapePath>
         <genId visible="true">n{x}</genId>
         <name visible="true" editable="false">End</name>
         <styleProperties>

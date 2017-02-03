@@ -12,10 +12,14 @@ import nl.rug.ds.bpm.editor.models.graphModels.SuperCell;
 import org.w3c.dom.Document;
 
 import javax.swing.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -40,14 +44,15 @@ public class BPMNGraphComponent extends mxGraphComponent {
         setToolTips(true);
         //getConnectionHandler().setCreateTarget(true);
 
-
         mxCodec codec = new mxCodec();
-        Document doc = mxUtils.loadDocument(Configloader.resourcePath + "/bpmn-style.xml");
 
-        codec.decode(doc.getDocumentElement(), graph.getStylesheet());
-
-        URL panningUrl = Main.class.getResource("/resources/images/green-dot.png");
-        ImageIcon panningIcon = new ImageIcon(panningUrl);
+        try {
+            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document doc = documentBuilder.parse(Main.class.getResourceAsStream("/resources/bpmn-style.xml"));
+            codec.decode(doc.getDocumentElement(), graph.getStylesheet());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         //this.getConnectionHandler().setConnectIcon(panningIcon);
 

@@ -5,6 +5,8 @@ import org.w3c.dom.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.io.InputStream;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -183,9 +185,19 @@ public class XMLHelper {
 
     public static Document LoadXMLFromFile(String pathname) {
         try {
-            File xmlFile = new File(pathname);
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document document = documentBuilder.parse(xmlFile);
+            Document document = documentBuilder.parse(pathname);
+            return document;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Document LoadXMLFromFile(InputStream inputStream) {
+        try {
+            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document document = documentBuilder.parse(inputStream);
             return document;
         } catch (Exception e) {
             e.printStackTrace();
