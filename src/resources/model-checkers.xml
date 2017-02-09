@@ -23,7 +23,7 @@
     <ModelChecker enabled="true">
         <id>MCheck</id>
         <name>MCheck</name>
-        <location>%User_Home%/VxBPM/mch.jar</location>
+        <location>jar:!/mch.jar</location>
         <specificationLanguages>
             <specificationLanguage format="{c}">LTL</specificationLanguage>
         </specificationLanguages>

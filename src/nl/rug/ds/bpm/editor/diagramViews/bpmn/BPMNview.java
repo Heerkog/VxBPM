@@ -5,12 +5,10 @@ import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.mxGraphOutline;
 import com.mxgraph.util.*;
 import nl.rug.ds.bpm.editor.GUIApplication;
-import nl.rug.ds.bpm.editor.core.configloader.Configloader;
 import nl.rug.ds.bpm.editor.core.enums.EventType;
 import nl.rug.ds.bpm.editor.core.listeners.EventSource;
 import nl.rug.ds.bpm.editor.models.InputElement;
 import nl.rug.ds.bpm.editor.models.graphModels.InputCell;
-import org.wfmc._2008.xpdl2.ApplicationType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,16 +37,16 @@ public class BPMNview {
         graph.setGridEnabled(true);
         graph.setDisconnectOnMove(false);
         graph.getSelectionModel().addListener(mxEvent.CHANGE, (s, e) ->
-                EventSource.fireEvent(EventType.SELECTION_CHANGED, (Object) null)
+                EventSource.fireEvent(EventType.SELECTION_CHANGED, null)
         );
         graph.addListener(mxEvent.CELLS_ADDED, (s, e) ->
-                EventSource.fireEvent(EventType.BPMN_CHANGED, (Object) null)
+                EventSource.fireEvent(EventType.BPMN_CHANGED, null)
         );
         graph.addListener(mxEvent.CELLS_REMOVED, (s, e) ->
-                EventSource.fireEvent(EventType.BPMN_CHANGED, (Object) null)
+                EventSource.fireEvent(EventType.BPMN_CHANGED, null)
         );
         graph.addListener(mxEvent.CELL_CONNECTED, (s, e) ->
-                EventSource.fireEvent(EventType.BPMN_CHANGED, (Object) null)
+                EventSource.fireEvent(EventType.BPMN_CHANGED, null)
         );
 
         EventSource.addListener(EventType.BPMN_REDRAW, e -> {
@@ -126,7 +124,7 @@ public class BPMNview {
                             item.addActionListener(new ActionListener() {
                                 public void actionPerformed(ActionEvent e) {
                                     inputCell.setInputElement(inputElement);
-                                    EventSource.fireEvent(EventType.SELECTION_CHANGED, (Object) null);
+                                    EventSource.fireEvent(EventType.SELECTION_CHANGED, null);
                                 }
                             });
                         }
