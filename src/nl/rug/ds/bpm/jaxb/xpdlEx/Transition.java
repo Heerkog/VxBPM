@@ -1,4 +1,4 @@
-package nl.rug.ds.bpm.editor.core.jaxb.xpdlEx;
+package nl.rug.ds.bpm.jaxb.xpdlEx;
 
 
 import javax.xml.bind.annotation.XmlAttribute;

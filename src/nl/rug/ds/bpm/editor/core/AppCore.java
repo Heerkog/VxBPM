@@ -100,7 +100,7 @@ public class AppCore {
         return gui.getGraph().bpmnService;
     }
 
-    public void OpenXPDL() {
+    public void openXPDL() {
         clear();
 
         JFileChooser fc = new JFileChooser();
@@ -164,8 +164,27 @@ public class AppCore {
         //variables.clear();
         kripkeStructures.clear();
         //constraints.clear();
+        gui.importService.clear();
 
         EventSource.fireEvent(EventType.VARIABLES_CHANGED, null);
         EventSource.fireEvent(EventType.BPMN_REDRAW, null);
+    }
+
+    public void importSpecificationSet() {
+        JFileChooser fc = new JFileChooser();
+        fc.setAcceptAllFileFilterUsed(false);
+
+        FileNameExtensionFilter vf = new FileNameExtensionFilter("Specification XML files", "xml");
+        fc.addChoosableFileFilter(vf);
+        fc.setFileFilter(vf);
+
+        if (fc.showOpenDialog(gui.getFrame()) == JFileChooser.APPROVE_OPTION) {
+            File spec = fc.getSelectedFile();
+            XMLSpecUnmarshaller xmlum = new XMLSpecUnmarshaller(spec);
+
+            EventSource.fireEvent(EventType.CHECKMODEL_BUTTON_CLICK, null);
+        }
+        EventSource.fireEvent(EventType.FILE_OPENED, null);
+        EventSource.fireEvent(EventType.CONSOLE_CONSTRAINT, null);
     }
 }

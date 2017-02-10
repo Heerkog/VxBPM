@@ -6,6 +6,7 @@ import com.mxgraph.util.mxPoint;
 import nl.rug.ds.bpm.editor.core.AppCore;
 import nl.rug.ds.bpm.editor.core.enums.PropertyFieldType;
 import nl.rug.ds.bpm.editor.diagramViews.bpmn.BPMNGraph;
+import nl.rug.ds.bpm.editor.models.IConstraintHolder;
 import nl.rug.ds.bpm.editor.models.InputCellConstraint;
 import nl.rug.ds.bpm.editor.models.InputElement;
 import nl.rug.ds.bpm.editor.models.InputElementAttribute;
@@ -131,12 +132,10 @@ public class InputCell extends SuperCell {
             left = 30;
         }
 
-        for (InputCellConstraint constraint : constraints) {
-
+        for (IConstraintHolder constraint : constraints) {
             top += 10;
 
             // top = this.getGeometry().getHeight()-10-(index * 10);
-
 
             getChild(InputLabelCell.class, constraint.getId()).getGeometry().setOffset(new mxPoint(left, top));
             index++;
@@ -181,9 +180,7 @@ public class InputCell extends SuperCell {
             if (this.inputElement.IsGroup())
                 return false;
             int incomingCount = (int) this.getIncomingEdges().stream().filter(e -> edge == null || !e.getId().equals(((EdgeCell) edge).getId())).count();
-            if (incomingCount + 1 > this.getInputElement().getMaxIncoming())
-                return false;
-            return true;
+            return incomingCount + 1 <= this.getInputElement().getMaxIncoming();
         }
     }
 
@@ -199,14 +196,10 @@ public class InputCell extends SuperCell {
 
             //Count all outgoing edges but except the current edge
             int outgoingCount = (int) this.getOutgoingEdges().stream()
-                    .filter(e -> !((EdgeCell) e).isValidSource)
+                    .filter(e -> !e.isValidSource)
                     .filter(e -> edge == null || !e.getId().equals(((EdgeCell) edge).getId()))
                     .count();
-            if (outgoingCount + 1 > this.getInputElement().getMaxOutgoing())
-                return false;
-
-
-            return true;
+            return outgoingCount + 1 <= this.getInputElement().getMaxOutgoing();
         }
     }
 

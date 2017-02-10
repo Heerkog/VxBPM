@@ -5,5 +5,6 @@ package nl.rug.ds.bpm.editor.core.enums;
  */
 public enum ConstraintType {
     Edge,
-    Object
+    Object,
+    Import
 }

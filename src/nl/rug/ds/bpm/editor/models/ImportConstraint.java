@@ -14,13 +14,21 @@ import java.util.List;
  * Created by p256867 on 7-2-2017.
  */
 public class ImportConstraint implements java.io.Serializable, IConstraintHolder {
+    private static int i = 0;
+    private String id;
     private Constraint constraint;
     private ConstraintStatus status = ConstraintStatus.None;
     private SuperCell cell;
 
     public ImportConstraint(SuperCell cell, Constraint constraint) {
+        id = "ic" + i++;
         this.cell = cell;
         this.constraint = constraint;
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 
     @Override

@@ -20,6 +20,13 @@ public class Constraint implements java.io.Serializable {
     private String id;
     private ConstraintType constraintType;
 
+    public Constraint(String id, List<String> formulas, SpecificationLanguage specificationLanguage, ConstraintType constraintType) {
+        this.id = id;
+        this.formulas = formulas;
+        this.specificationLanguage = specificationLanguage;
+        this.constraintType = constraintType;
+    }
+
     public Constraint(Node elemNode, HashMap<String, Arrow> arrows, SpecificationLanguage specificationLanguage, ConstraintType constraintType) {
         this.specificationLanguage = specificationLanguage;
         this.constraintType = constraintType;
@@ -49,7 +56,7 @@ public class Constraint implements java.io.Serializable {
 
     public Arrow getArrow() {
         if (arrow == null) {
-            Console.error("arrow missing:" + formulas.toString());
+            Console.error("visual element missing:" + formulas.toString());
         }
         return arrow;
     }
