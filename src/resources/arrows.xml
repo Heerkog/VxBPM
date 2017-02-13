@@ -271,5 +271,14 @@
             <shape>rectangle</shape>
         </centerShapes>
     </arrow>
+    
+    
+    
+    <!--Import constraints-->
+    <arrow id="Import" name="Imported">
+        <centerShapes>
+            <shape>rectangleFilled</shape>
+        </centerShapes>
+    </arrow>
 </arrows>
 

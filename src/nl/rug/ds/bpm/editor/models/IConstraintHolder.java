@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface IConstraintHolder {
     String getId();
+    String getName();
     List<EdgeCellVariable> getVariablesValues();
     Constraint getConstraint();
     List<Formula> getFormula();
