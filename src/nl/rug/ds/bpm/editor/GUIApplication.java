@@ -12,6 +12,7 @@ import nl.rug.ds.bpm.editor.panels.cpn.CpnTab;
 import nl.rug.ds.bpm.editor.panels.kripke.KripkeTab;
 import nl.rug.ds.bpm.editor.services.CellService;
 import nl.rug.ds.bpm.editor.services.ConstraintService;
+import nl.rug.ds.bpm.editor.services.ImportService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +29,7 @@ public class GUIApplication {
     public KripkeTab kripkeTab;
     public CellService cellService;
     private ConstraintService constraintService;
+    public ImportService importService;
 
     public GUIApplication() {
         AppCore.gui = this;
@@ -41,6 +43,7 @@ public class GUIApplication {
 
         cellService = new CellService(bpmnTab.getGraph());
         constraintService = new ConstraintService(bpmnTab.getGraph());
+        importService = new ImportService();
 
 
         cpnTab = new CpnTab();

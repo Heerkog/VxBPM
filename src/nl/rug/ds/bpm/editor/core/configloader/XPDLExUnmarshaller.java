@@ -4,7 +4,6 @@ import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
 import com.mxgraph.util.mxPoint;
 import nl.rug.ds.bpm.editor.core.AppCore;
-import nl.rug.ds.bpm.editor.core.jaxb.xpdlEx.*;
 import nl.rug.ds.bpm.editor.diagramViews.bpmn.BPMNGraph;
 import nl.rug.ds.bpm.editor.models.Constraint;
 import nl.rug.ds.bpm.editor.models.EdgeCellVariable;
@@ -13,6 +12,7 @@ import nl.rug.ds.bpm.editor.models.graphModels.ConstrainEdgeCell;
 import nl.rug.ds.bpm.editor.models.graphModels.EdgeCell;
 import nl.rug.ds.bpm.editor.models.graphModels.InputCell;
 import nl.rug.ds.bpm.editor.models.graphModels.SuperCell;
+import nl.rug.ds.bpm.jaxb.xpdlEx.*;
 import nl.rug.ds.bpm.verification.models.cpn.Variable;
 import org.wfmc._2008.xpdl2.ConnectorGraphicsInfo;
 import org.wfmc._2008.xpdl2.Coordinates;
@@ -33,7 +33,7 @@ public class XPDLExUnmarshaller {
 
     @SuppressWarnings("unchecked")
     public XPDLExUnmarshaller(File file) {
-        graph = AppCore.app.gui.getGraph();
+        graph = AppCore.gui.getGraph();
         try {
             JAXBContext context = JAXBContext.newInstance(XpdlEx.class);
 
@@ -56,7 +56,7 @@ public class XPDLExUnmarshaller {
 
     private void importVariables() {
         AppCore.app.getVariables().removeIf(v -> !v.isDefault());
-        for (nl.rug.ds.bpm.editor.core.jaxb.xpdlEx.Variable element : xpdlEx.getVariables()) {
+        for (nl.rug.ds.bpm.jaxb.xpdlEx.Variable element : xpdlEx.getVariables()) {
             AppCore.app.getVariables().add(new Variable(element.getId(), element.getName()));
         }
     }

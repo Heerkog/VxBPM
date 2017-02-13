@@ -50,7 +50,12 @@ public class InputCellConstraint implements java.io.Serializable, IConstraintHol
     public String getId() {
         return id;
     }
-
+    
+    @Override
+    public String getName() {
+        return constrain.getArrow().getName();
+    }
+    
     public String getTableName() {
         return getGraphName();
     }
@@ -104,11 +109,11 @@ public class InputCellConstraint implements java.io.Serializable, IConstraintHol
 
     public void updateGraphView() {
         try {
-            AppCore.app.gui.getGraph().getModel().beginUpdate();
+            AppCore.gui.getGraph().getModel().beginUpdate();
             getLabelCell().setValue(getGraphName());
         } finally {
-            AppCore.app.gui.getGraph().getModel().endUpdate();
-            AppCore.app.gui.getGraph().refresh();
+            AppCore.gui.getGraph().getModel().endUpdate();
+            AppCore.gui.getGraph().refresh();
         }
     }
 

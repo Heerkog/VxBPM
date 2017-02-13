@@ -24,7 +24,15 @@ public abstract class Formula {
     public String getTypeName() {
         return this.typeName;
     }
-
+    
+    public String getName() {
+        String name = "";
+        if(constraint.getArrow() != null)
+            name = constraint.getArrow().getName();
+        else
+            name = constraint.getId();
+        return name;
+    }
 
     public boolean isEdge() {
         return isEdge;

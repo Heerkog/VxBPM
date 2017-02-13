@@ -129,6 +129,8 @@ public class Configloader {
     public List<Arrow> getArrows() {
         return new ArrayList<Arrow>(arrows.values());
     }
+    
+    public HashMap<String, Arrow> getArrowMap() { return arrows; }
 
     public List<InputElement> getInputElements() {
         return new ArrayList<>(inputElements.values());

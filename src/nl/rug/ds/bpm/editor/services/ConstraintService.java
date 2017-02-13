@@ -4,6 +4,7 @@ import com.mxgraph.model.mxGraphModel;
 import nl.rug.ds.bpm.editor.core.AppCore;
 import nl.rug.ds.bpm.editor.diagramViews.bpmn.BPMNGraph;
 import nl.rug.ds.bpm.editor.models.IConstraintHolder;
+import nl.rug.ds.bpm.editor.models.ImportConstraint;
 import nl.rug.ds.bpm.editor.models.InputCellConstraint;
 import nl.rug.ds.bpm.editor.models.graphModels.ConstrainEdgeCell;
 import nl.rug.ds.bpm.editor.models.graphModels.InputCell;
@@ -48,11 +49,13 @@ public class ConstraintService {
     public List<ConstrainEdgeCell> getAllEdgeConstraint(){
         return getCellService().getCells(ConstrainEdgeCell.class);
     }
+    public List<ImportConstraint> getAllImportConstraint() { return AppCore.gui.importService.getImportConstraints(); }
 
     public List<IConstraintHolder> getAllConstraintHolders(){
         List<IConstraintHolder> constraints = new ArrayList<>();
         constraints.addAll(this.getAllInputCellConstraint());
         constraints.addAll(getAllEdgeConstraint());
+        constraints.addAll(getAllImportConstraint());
         return constraints;
     }
 

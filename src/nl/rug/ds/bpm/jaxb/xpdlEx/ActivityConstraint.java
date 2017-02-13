@@ -1,5 +1,4 @@
-package nl.rug.ds.bpm.editor.core.jaxb.xpdlEx;
-
+package nl.rug.ds.bpm.jaxb.xpdlEx;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -12,26 +11,38 @@ import java.util.List;
  * Created by Mark Kloosterhuis.
  */
 @XmlRootElement
-public class Transition {
-    private String id;
+public class ActivityConstraint {
+    private String activityId;
+    private String constraintId;
     private List<VariableValue> variables = new ArrayList<>();
 
-    public Transition() {
+    public ActivityConstraint() {
     }
 
-    public Transition(String id) {
-        this.id = id;
+    public ActivityConstraint(String activityId, String constraintId) {
+        this.activityId = activityId;
+        this.constraintId = constraintId;
     }
 
-    public String getId() {
-        return id;
+
+
+    @XmlAttribute
+    public void setActivityId(String value) {
+        this.activityId = value;
+    }
+
+    public String getActivityId() {
+        return activityId;
     }
 
     @XmlAttribute
-    public void setId(String id) {
-        this.id = id;
+    public void setConstraintId(String constraintId) {
+        this.constraintId = constraintId;
     }
 
+    public String getConstraintId() {
+        return constraintId;
+    }
 
     @XmlElementWrapper(name = "variableValues")
     @XmlElement(name = "variableValue")
@@ -42,6 +53,4 @@ public class Transition {
     public void addVariableValue(int variableId, String condition, String variableValue) {
         this.variables.add(new VariableValue(variableId, condition, variableValue));
     }
-
-
 }
