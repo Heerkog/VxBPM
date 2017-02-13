@@ -3,17 +3,16 @@ package nl.rug.ds.bpm.editor.core.configloader;
 import com.mxgraph.model.mxGeometry;
 import com.mxgraph.util.mxPoint;
 import nl.rug.ds.bpm.editor.core.AppCore;
-import nl.rug.ds.bpm.editor.core.jaxb.xpdlEx.ActivityConstraint;
-import nl.rug.ds.bpm.editor.core.jaxb.xpdlEx.Transition;
-import nl.rug.ds.bpm.editor.core.jaxb.xpdlEx.XPDLConstraint;
-import nl.rug.ds.bpm.editor.core.jaxb.xpdlEx.XpdlEx;
 import nl.rug.ds.bpm.editor.diagramViews.bpmn.BPMNService;
 import nl.rug.ds.bpm.editor.models.EdgeCellVariable;
-import nl.rug.ds.bpm.editor.models.InputCellConstraint;
+import nl.rug.ds.bpm.editor.models.IConstraintHolder;
 import nl.rug.ds.bpm.editor.models.graphModels.ConstrainEdgeCell;
 import nl.rug.ds.bpm.editor.models.graphModels.EdgeCell;
 import nl.rug.ds.bpm.editor.models.graphModels.InputCell;
-import nl.rug.ds.bpm.editor.models.graphModels.SuperCell;
+import nl.rug.ds.bpm.jaxb.xpdlEx.ActivityConstraint;
+import nl.rug.ds.bpm.jaxb.xpdlEx.Transition;
+import nl.rug.ds.bpm.jaxb.xpdlEx.XPDLConstraint;
+import nl.rug.ds.bpm.jaxb.xpdlEx.XpdlEx;
 import nl.rug.ds.bpm.verification.models.cpn.Variable;
 import org.wfmc._2008.xpdl2.ConnectorGraphicsInfo;
 import org.wfmc._2008.xpdl2.ConnectorGraphicsInfos;
@@ -58,8 +57,8 @@ public class XPDLExMarshaller {
         for (ConstrainEdgeCell edge : bpmnService.getRelations()) {
             XPDLConstraint XPDLConstraint = new XPDLConstraint(
                     edge.getId(),
-                    edge.getSource() != null ? ((SuperCell) edge.getSource()).getId() : null,
-                    edge.getTarget() != null ? ((SuperCell) edge.getTarget()).getId() : null,
+                    edge.getSource() != null ? edge.getSource().getId() : null,
+                    edge.getTarget() != null ? edge.getTarget().getId() : null,
                     edge.getConstraint().getId()
             );
             xpdlEx.AddConstraint(XPDLConstraint);
@@ -85,7 +84,7 @@ public class XPDLExMarshaller {
 
     private void createAcitivityConstraints() {
         for (InputCell activity : bpmnService.getCells()) {
-            for (InputCellConstraint constraint : activity.getConstraints()) {
+            for (IConstraintHolder constraint : activity.getConstraints()) {
                 ActivityConstraint activityConstraint = new ActivityConstraint(activity.getId(), constraint.getConstraint().getId());
                 for (EdgeCellVariable value : constraint.getVariablesValues()) {
                     activityConstraint.addVariableValue(value.getVariableId(), value.getCondition(), value.getValue());

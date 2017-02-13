@@ -12,6 +12,7 @@ import nl.rug.ds.bpm.editor.models.graphModels.EdgeCell;
 import nl.rug.ds.bpm.editor.models.graphModels.InputCell;
 import nl.rug.ds.bpm.editor.models.graphModels.SuperCell;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -148,9 +149,7 @@ public class BPMNGraph extends mxGraph {
 
     @Override
     public boolean isCellSelectable(Object cell) {
-        if (cell instanceof SuperCell && ((SuperCell) cell).isCellSelectable())
-            return true;
-        return false;
+        return cell instanceof SuperCell && ((SuperCell) cell).isCellSelectable();
     }
 
     public void setInputElements(List<InputElement> inputElements) {
@@ -167,6 +166,21 @@ public class BPMNGraph extends mxGraph {
             element = inputElements.stream().filter(p -> p.getId().equals(id)).findFirst().get();
         }
         return element;
+    }
+
+    public InputCell getByName(String name)
+    {
+        InputCell cell = null;
+        Iterator<String> iterator = model.getCells().keySet().iterator();
+        while (iterator.hasNext() && cell == null) {
+            String key = iterator.next();
+            if(model.getCells().get(key) instanceof InputCell) {
+                InputCell c = (InputCell) model.getCells().get(key);
+                if (c.getName().equals(name))
+                    cell = c;
+            }
+        }
+        return cell;
     }
 
     public List<InputCell> getByGenName(String genName) {

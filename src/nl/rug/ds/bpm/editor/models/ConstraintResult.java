@@ -1,8 +1,11 @@
 package nl.rug.ds.bpm.editor.models;
 
 import nl.rug.ds.bpm.editor.core.enums.ConstraintStatus;
+import nl.rug.ds.bpm.editor.core.enums.ConstraintType;
+import nl.rug.ds.bpm.editor.models.graphModels.SuperCell;
 import nl.rug.ds.bpm.verification.constraints.Formula;
 import nl.rug.ds.bpm.verification.models.kripke.Kripke;
+import nl.rug.ds.bpm.verification.models.kripke.State;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,33 +61,52 @@ public class ConstraintResult {
     }
 
     public String getCheckerInput(Kripke kripke) {
+        String ret = "";
         String source = "";
         String target = "";
-        if (formula.getSourceCell() != null) {
-            sourceIds = getAvailableAtomicPropositions(
-                    formula.getSourceCell().getCpnTransitionIds(),
-                    Arrays.asList(kripke.getAtomicPropositionsArray())
-            );
-        }
-        source = combineElements(sourceIds);
-        if (sourceIds.isEmpty()) {
-            addError("Source element not found");
-            setStatus(ConstraintStatus.Unavailable);
-        }
-
-        if (formula.isEdge() && formula.getTargetCell() != null) {
-            targetIds = getAvailableAtomicPropositions(
-                    formula.getTargetCell().getCpnTransitionIds(),
-                    Arrays.asList(kripke.getAtomicPropositionsArray())
-            );
-            target = combineElements(targetIds);
-            if (targetIds.isEmpty()) {
-                addError("Target element not found");
+        
+        //if imported the formula is already parsed
+        if(constraintHolder.getConstraint().getConstraintType() == ConstraintType.Import) {
+            ret = formula.getFormula();
+            
+            //add silent as AP
+            for(State s: kripke.getInitialArray())
+                s.getAtomicPropositions().add("silent");
+            kripke.addAtomicProposition("silent");
+            
+            //add used sourceIds
+            for(SuperCell cell: ((ImportConstraint) constraintHolder).getCells())
+                sourceIds.addAll(getAvailableAtomicPropositions(
+                    cell.getCpnTransitionIds(),
+                    Arrays.asList(kripke.getAtomicPropositionsArray())));
+        } //else parse the formula
+        else {
+            if (formula.getSourceCell() != null) {
+                sourceIds = getAvailableAtomicPropositions(
+                        formula.getSourceCell().getCpnTransitionIds(),
+                        Arrays.asList(kripke.getAtomicPropositionsArray())
+                );
+            }
+            source = combineElements(sourceIds);
+            if (sourceIds.isEmpty()) {
+                addError("Source element not found");
                 setStatus(ConstraintStatus.Unavailable);
             }
+    
+            if (formula.isEdge() && formula.getTargetCell() != null) {
+                targetIds = getAvailableAtomicPropositions(
+                        formula.getTargetCell().getCpnTransitionIds(),
+                        Arrays.asList(kripke.getAtomicPropositionsArray())
+                );
+                target = combineElements(targetIds);
+                if (targetIds.isEmpty()) {
+                    addError("Target element not found");
+                    setStatus(ConstraintStatus.Unavailable);
+                }
+            }
+            ret = formula.getFormula().replace("$p", source).replace("$q", target);
         }
-
-        return formula.getFormula().replace("$p", source).replace("$q", target);
+        return ret;
 
     }
 
@@ -119,6 +141,6 @@ public class ConstraintResult {
         if (formula.getSourceCell() != null && formula.getTargetCell() != null)
             return formula.getSourceCell().getVisibleId() + " -> " + formula.getTargetCell().getVisibleId();
 
-        return formula.getCell().getId();
+        return formula.getCell().getVisibleId();
     }
 }

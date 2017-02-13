@@ -14,15 +14,29 @@ import java.util.List;
  * Created by p256867 on 7-2-2017.
  */
 public class ImportConstraint implements java.io.Serializable, IConstraintHolder {
+    private static int i = 0;
+    private String id, name;
     private Constraint constraint;
     private ConstraintStatus status = ConstraintStatus.None;
     private SuperCell cell;
+    private List<SuperCell> cells;
 
-    public ImportConstraint(SuperCell cell, Constraint constraint) {
-        this.cell = cell;
+    public ImportConstraint(String name, SuperCell source, List<SuperCell> cells, Constraint constraint) {
+        id = "ic" + i++;
+        this.name = name;
+        this.cell = source;
         this.constraint = constraint;
+        this.cells = cells;
     }
 
+    @Override
+    public String getId() {
+        return id;
+    }
+    
+    @Override
+    public String getName() { return name; }
+    
     @Override
     public List<EdgeCellVariable> getVariablesValues() {
         return new ArrayList<EdgeCellVariable>();
@@ -38,13 +52,15 @@ public class ImportConstraint implements java.io.Serializable, IConstraintHolder
         List<Formula> formulas = new ArrayList<>();
         constraint.getFormulas().forEach(f -> {
             String formula = f;
+            Formula a = null;
             if (constraint.getSpecificationLanguage().getId().equals("CTL")) {
-                formulas.add(new CTLFormula(cell, constraint, formula, false));
+                a = new CTLFormula(cell, constraint, formula, false);
             } else if (constraint.getSpecificationLanguage().getId().equals("LTL")) {
-                formulas.add(new LTLFormula(cell, constraint, formula, false));
+                a = new LTLFormula(cell, constraint, formula, false);
             } else if (constraint.getSpecificationLanguage().getId().equals("justice")) {
-                formulas.add(new JusticeFormula(cell, constraint, formula, false));
+                a = new JusticeFormula(cell, constraint, formula, false);
             }
+            formulas.add(a);
         });
         return formulas;
     }
@@ -56,4 +72,6 @@ public class ImportConstraint implements java.io.Serializable, IConstraintHolder
 
     @Override
     public void select() {}
+    
+    public List<SuperCell> getCells() { return cells; }
 }

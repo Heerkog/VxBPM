@@ -132,7 +132,7 @@ public class KripkeStructure {
 
         for (IConstraintHolder constraintEdge : edges) {
             for (Formula formula : constraintEdge.getFormula()) {
-                ConstraintResult constraintResult = new ConstraintResult(constraintEdge, formula, formula.getArrow().getName());
+                ConstraintResult constraintResult = new ConstraintResult(constraintEdge, formula, formula.getName());
                 constraintResult.setFormulaInput(constraintResult.getCheckerInput(kripke));
                 constraintResults.add(constraintResult);
                 unusedAps.removeAll(constraintResult.getSourceIds());

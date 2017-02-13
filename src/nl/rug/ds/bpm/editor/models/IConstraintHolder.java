@@ -9,6 +9,8 @@ import java.util.List;
  * Created by Mark on 23-1-2016.
  */
 public interface IConstraintHolder {
+    String getId();
+    String getName();
     List<EdgeCellVariable> getVariablesValues();
     Constraint getConstraint();
     List<Formula> getFormula();
