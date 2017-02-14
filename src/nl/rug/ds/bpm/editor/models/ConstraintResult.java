@@ -69,10 +69,12 @@ public class ConstraintResult {
         if(constraintHolder.getConstraint().getConstraintType() == ConstraintType.Import) {
             ret = formula.getFormula();
             
-            //add silent as AP
-            for(State s: kripke.getInitialArray())
-                s.getAtomicPropositions().add("silent");
-            kripke.addAtomicProposition("silent");
+            //add silent as AP if used
+            if(ret.toLowerCase().contains("silent")) {
+                for (State s : kripke.getInitialArray())
+                    s.getAtomicPropositions().add("silent");
+                kripke.addAtomicProposition("silent");
+            }
             
             //add used sourceIds
             for(SuperCell cell: ((ImportConstraint) constraintHolder).getCells())
