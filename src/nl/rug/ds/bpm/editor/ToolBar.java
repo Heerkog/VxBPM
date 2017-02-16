@@ -96,11 +96,11 @@ public class ToolBar extends JMenuBar {
         verificationMenu.addSeparator();
 
         autocheck = new JCheckBoxMenuItem("Automatic Verification");
-        autocheck.setSelected(true);
+        autocheck.setSelected(false);
         verificationMenu.add(autocheck);
 
         fullAutoput = new JCheckBoxMenuItem("Full output");
-        fullAutoput.setSelected(true);
+        fullAutoput.setSelected(false);
         fullAutoput.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

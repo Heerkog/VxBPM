@@ -65,7 +65,7 @@ public class XPDLExUnmarshaller {
         try {
             List<EdgeCell> edgeCells = graph.getAllEdgeCells();
             for (Transition element : xpdlEx.getTransitions()) {
-                SuperCell cell = graph.getById(element.getId());
+                SuperCell cell = graph.getByVisibleId(element.getId());
                 if (cell != null && EdgeCell.class.isInstance(cell)) {
                     EdgeCell edge = (EdgeCell) cell;
                     List<EdgeCellVariable> variablesValues = new ArrayList<>();
@@ -84,8 +84,8 @@ public class XPDLExUnmarshaller {
 
     private void importConstraints() {
         for (XPDLConstraint XPDLConstraint : xpdlEx.getXPDLConstraints()) {
-            InputCell sourceCell = (InputCell) graph.getById(XPDLConstraint.getFrom());
-            InputCell targetCell = (InputCell) graph.getById(XPDLConstraint.getTo());
+            InputCell sourceCell = (InputCell) graph.getByVisibleId(XPDLConstraint.getFrom());
+            InputCell targetCell = (InputCell) graph.getByVisibleId(XPDLConstraint.getTo());
 
             if (sourceCell != null && targetCell != null && AppCore.app.getConstraints().containsKey(XPDLConstraint.getConstraintId())) {
                 Constraint constraint = AppCore.app.getConstraints().get(XPDLConstraint.getConstraintId());
@@ -117,7 +117,7 @@ public class XPDLExUnmarshaller {
 
     private void importAcitivityConstraints() {
         for (ActivityConstraint activityConstraint : xpdlEx.getActivityConstraints()) {
-            InputCell cell = (InputCell) graph.getById(activityConstraint.getActivityId());
+            InputCell cell = (InputCell) graph.getByVisibleId(activityConstraint.getActivityId());
             if (cell != null) {
                 Constraint constraint = AppCore.app.getConstraints().get(activityConstraint.getConstraintId());
                 if (constraint != null) {

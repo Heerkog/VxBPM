@@ -76,7 +76,7 @@ public class XPDLMarshaller {
             Artifact group = createArtifact(element);
             group.setGroup(of.createGroup());
 
-            group.getGroup().setId(element.getId());
+            group.getGroup().setId(element.getVisibleId());
         }
     }
 
@@ -170,10 +170,10 @@ public class XPDLMarshaller {
             if (!(edge instanceof ConstrainEdgeCell)) {
                 Transition transition = of.createTransition();
                 if (edge.getSource() != null)
-                    transition.setFrom(((SuperCell) edge.getSource()).getId());
+                    transition.setFrom(((SuperCell) edge.getSource()).getVisibleId());
                 if (edge.getTarget() != null)
-                    transition.setTo(((SuperCell) edge.getTarget()).getId());
-                transition.setId(edge.getId());
+                    transition.setTo(((SuperCell) edge.getTarget()).getVisibleId());
+                transition.setId(edge.getVisibleId());
                 transition.setName(edge.getVisibleId());
                 transition.setConnectorGraphicsInfos(of.createConnectorGraphicsInfos());
                 ConnectorGraphicsInfo gfxInfo = of.createConnectorGraphicsInfo();
@@ -221,7 +221,7 @@ public class XPDLMarshaller {
 
     private Lane createLane(InputCell element) {
         Lane lane = of.createLane();
-        lane.setId(element.getId());
+        lane.setId(element.getVisibleId());
         lane.setName(element.getName());
 
 
@@ -244,7 +244,7 @@ public class XPDLMarshaller {
     private Artifact createArtifact(InputCell element) {
         Artifact artifact = of.createArtifact();
         artifact.setArtifactType("Group");
-        artifact.setId(element.getId());
+        artifact.setId(element.getVisibleId());
         artifact.setName(element.getName());
         double y = element.getGeoAbsoluteY();
         double x = element.getGeoAbsoluteX();
@@ -270,11 +270,11 @@ public class XPDLMarshaller {
 
     private Activity createActivity(InputCell element) {
         Activity activity = of.createActivity();
-        activity.setId(element.getId());
+        activity.setId(element.getVisibleId());
        // if (element.getName() == null || element.getName().isEmpty())
        //     activity.setName(element.getVisibleId());
       //  else
-            activity.setName(element.getName());
+        activity.setName(element.getName());
 
 
         double y = element.getGeoAbsoluteY();

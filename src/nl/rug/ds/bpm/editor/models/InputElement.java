@@ -12,6 +12,7 @@ import java.util.List;
  * Created by Mark on 29-6-2015.
  */
 public class InputElement implements java.io.Serializable {
+    private Node elemNode;
     private String id;
     private String cpnElementName;
     private int width = 50;
@@ -41,6 +42,7 @@ public class InputElement implements java.io.Serializable {
 
 
     public InputElement(Node elemNode) {
+        this.elemNode = elemNode;
         customStyleProperties = new HashMap<>();
         this.id = XMLHelper.getNodeAttr("id", elemNode, "");
 
@@ -224,5 +226,10 @@ public class InputElement implements java.io.Serializable {
 
     public String getBpmnElementName() {
         return bpmnElementName;
+    }
+
+    public InputElement clone()
+    {
+        return new InputElement(elemNode);
     }
 }

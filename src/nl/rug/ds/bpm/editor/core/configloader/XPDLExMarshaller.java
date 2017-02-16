@@ -48,7 +48,7 @@ public class XPDLExMarshaller {
 
     private void createTransitions() {
         for (EdgeCell edge : bpmnService.getEdges()) {
-            Transition transition = xpdlEx.AddTransition(edge.getId());
+            Transition transition = xpdlEx.AddTransition(edge.getVisibleId());
             for (EdgeCellVariable value : edge.getVariablesValues()) {
                 transition.addVariableValue(value.getVariableId(), value.getCondition(), value.getValue());
             }
@@ -56,7 +56,7 @@ public class XPDLExMarshaller {
 
         for (ConstrainEdgeCell edge : bpmnService.getRelations()) {
             XPDLConstraint XPDLConstraint = new XPDLConstraint(
-                    edge.getId(),
+                    edge.getVisibleId(),
                     edge.getSource() != null ? edge.getSource().getId() : null,
                     edge.getTarget() != null ? edge.getTarget().getId() : null,
                     edge.getConstraint().getId()
@@ -85,7 +85,7 @@ public class XPDLExMarshaller {
     private void createAcitivityConstraints() {
         for (InputCell activity : bpmnService.getCells()) {
             for (IConstraintHolder constraint : activity.getConstraints()) {
-                ActivityConstraint activityConstraint = new ActivityConstraint(activity.getId(), constraint.getConstraint().getId());
+                ActivityConstraint activityConstraint = new ActivityConstraint(activity.getVisibleId(), constraint.getConstraint().getId());
                 for (EdgeCellVariable value : constraint.getVariablesValues()) {
                     activityConstraint.addVariableValue(value.getVariableId(), value.getCondition(), value.getValue());
                 }

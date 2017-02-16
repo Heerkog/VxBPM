@@ -31,7 +31,7 @@ public class XPDLUnmarshaller {
 
     @SuppressWarnings("unchecked")
     public XPDLUnmarshaller(File file) {
-        graph = AppCore.app.gui.getGraph();
+        graph = AppCore.gui.getGraph();
         String ext = null;
         int i = file.getName().lastIndexOf('.');
 
@@ -91,7 +91,7 @@ public class XPDLUnmarshaller {
         double height = gfxInfo.get(0).getHeight();
         InputElement element = AppCore.app.config.getInputElement("group");
 
-        InputCell parent = (InputCell) AppCore.app.gui.getGraphComponent().getCellAt((int) xPos, (int) yPos, true);
+        InputCell parent = (InputCell) AppCore.gui.getGraphComponent().getCellAt((int) xPos, (int) yPos, true);
         if (parent != null) {
             yPos -= parent.getGeoAbsoluteY();
             xPos -= parent.getGeoAbsoluteX();
@@ -129,7 +129,7 @@ public class XPDLUnmarshaller {
         String id = element.getId();
         InputCell cell = InputCell.generateCell(graph, element, id, (int) xPos, (int) yPos);
         cell.setName(element.getName());
-        cell.setId(lane.getId());
+        cell.setVisibleId(lane.getId());
         cell.generateVisibleId();
 
         cell.getGeometry().setWidth(width);
@@ -147,7 +147,7 @@ public class XPDLUnmarshaller {
         xPos = Math.max(0, xPos - XPDLMarshaller.PoolOffsetLeft);
         double yPos = gfxInfo.get(0).getCoordinates().getYCoordinate();
         InputElement element = null;
-        InputCell parent = (InputCell) AppCore.app.gui.getGraphComponent().getCellAt((int) xPos, (int) yPos, true);
+        InputCell parent = (InputCell) AppCore.gui.getGraphComponent().getCellAt((int) xPos, (int) yPos, true);
         if (parent != null) {
             yPos -= parent.getGeoAbsoluteY();
             xPos -= parent.getGeoAbsoluteX();
@@ -229,7 +229,7 @@ public class XPDLUnmarshaller {
 
         if (sourceCell != null && targetCell != null) {
             EdgeCell cell = new EdgeCell(UUID.randomUUID().toString(), new mxGeometry(), "entity;edgeStyle=elbowEdgeStyle;orthogonal=false;fontSize=8;;editable=false");
-            cell.setId(transition.getId());
+            cell.setVisibleId(transition.getId());
             cell.setVisibleId(transition.getId());
             cell.setEdge(true);
             mxCell edge = (mxCell) graph.addEdge(cell, graph.getDefaultParent(), sourceCell, targetCell, 0);
