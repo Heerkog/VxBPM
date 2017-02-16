@@ -43,6 +43,9 @@ public class ToolBar extends JMenuBar {
         addMenuItem(fileMenu, "Save", null).addActionListener(e -> {
             AppCore.app.saveXPDL();
         });
+        addMenuItem(fileMenu, "Save As", null).addActionListener(e -> {
+            AppCore.app.saveXPDLAs();
+        });
         fileMenu.addSeparator();
         addMenuItem(fileMenu, "Import specifications", null).addActionListener(e -> {
             AppCore.app.importSpecificationSet();

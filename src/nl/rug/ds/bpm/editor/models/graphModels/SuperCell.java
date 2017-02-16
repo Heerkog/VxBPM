@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by Mark Kloosterhuis.
  */
-public class SuperCell extends mxCell implements java.io.Serializable {
+public class SuperCell extends mxCell implements Cloneable, java.io.Serializable {
     protected Constraint constrain;
     public CellProperties cellProperties;
     public boolean isValidSource = false;
@@ -30,7 +30,7 @@ public class SuperCell extends mxCell implements java.io.Serializable {
     }
 
     public BPMNGraph getGraph() {
-        return AppCore.app.gui.getGraph();
+        return AppCore.gui.getGraph();
     }
 
     public CellProperties getCellProperties() {
@@ -126,6 +126,14 @@ public class SuperCell extends mxCell implements java.io.Serializable {
         return null;
     }
 
+    public <T extends mxCell> T getChild(Class<T> type) {
+        for (Object object : children) {
+            if (type.isInstance(object))
+                return (T) object;
+        }
+        return null;
+    }
+
     public void setStyle(String key, String value) {
         getGraph().setCellStyles(key, value, new Object[]{this});
     }
@@ -152,5 +160,15 @@ public class SuperCell extends mxCell implements java.io.Serializable {
             parent = parent.getParent();
         }
         return left;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        SuperCell var1 = (SuperCell) super.clone();
+        var1.cellProperties = new CellProperties();
+        var1.cellProperties.addProperty(new CellProperty(PropertyFieldType.TextField, "Id", "Id", value.toString()));
+        var1.constrain = null;
+
+        return var1;
     }
 }

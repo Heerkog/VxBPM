@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Mark Kloosterhuis.
  */
-public class InputCell extends SuperCell {
+public class InputCell extends SuperCell implements Cloneable{
     private InputElement inputElement;
     private List<InputCellConstraint> constraints = new ArrayList<>();
     private String labelPostion = "bottom";
@@ -327,5 +327,19 @@ public class InputCell extends SuperCell {
         }
     }
 
+    public void clearConstraints(){
+        constraints = new ArrayList<>();
+    }
 
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        InputCell var1 = (InputCell )super.clone();
+        var1.cellProperties.addProperty(new CellProperty(PropertyFieldType.TextField, "Name", "Name", ""));
+        var1.generateVisibleId();
+        var1.setName(getName());
+        var1.setInputElement(inputElement.clone());
+        var1.clearConstraints();
+
+        return var1;
+    }
 }

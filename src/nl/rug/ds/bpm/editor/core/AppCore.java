@@ -34,7 +34,7 @@ public class AppCore {
     private HashMap<String, Constraint> constraints = new HashMap<>();
     public List<Variable> variables = new ArrayList<>();
     public boolean modelReductionEnabled = true;
-
+    private File xpdlsaveFile;
 
     public AppCore() {
         app = this;
@@ -112,9 +112,9 @@ public class AppCore {
 
 
         if (fc.showOpenDialog(gui.getFrame()) == JFileChooser.APPROVE_OPTION) {
-            File xpdlFile = fc.getSelectedFile();
-            File xpdlExFile = new File(xpdlFile.getAbsolutePath().replace(".xpdl", "") + ".xpdlex");
-            XPDLUnmarshaller unmarshall = new XPDLUnmarshaller(xpdlFile);
+            xpdlsaveFile = fc.getSelectedFile();
+            File xpdlExFile = new File(xpdlsaveFile.getAbsolutePath().replace(".xpdl", "") + ".xpdlex");
+            XPDLUnmarshaller unmarshall = new XPDLUnmarshaller(xpdlsaveFile);
             if (xpdlExFile.exists()) {
                 XPDLExUnmarshaller unmarshallEx = new XPDLExUnmarshaller(xpdlExFile);
             }
@@ -126,34 +126,45 @@ public class AppCore {
     }
 
     public void saveXPDL() {
+        if(xpdlsaveFile != null)
+            saveXPDL(xpdlsaveFile);
+        else
+            saveXPDLAs();
+    }
+
+    public void saveXPDLAs() {
         JFileChooser fc = new JFileChooser();
         fc.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter vf = new FileNameExtensionFilter("xpdl", "xpdl");
         fc.addChoosableFileFilter(vf);
 
         if (fc.showSaveDialog(gui.getFrame()) == JFileChooser.APPROVE_OPTION) {
-            XPDLMarshaller marshaller = new XPDLMarshaller();
-            XPDLExMarshaller marshallerEx = new XPDLExMarshaller();
-
-            File xpdlFile = fc.getSelectedFile();
-            File xpdlExFile = new File(xpdlFile.getAbsolutePath().replace(".xpdl", "") + ".xpdlex");
-
-            //XPDL
-            if (xpdlFile.exists())
-                marshaller.Marshall(xpdlFile);
-            else {
-                File f = new File(xpdlFile.getAbsoluteFile() + ".xpdl");
-                marshaller.Marshall(f);
-            }
-            //XPDLEX
-            marshallerEx.Marshall(xpdlExFile);
-
-
+            xpdlsaveFile = fc.getSelectedFile();
+            saveXPDL(xpdlsaveFile);
         }
+    }
+
+    private void saveXPDL(File xpdlFile) {
+        XPDLMarshaller marshaller = new XPDLMarshaller();
+        XPDLExMarshaller marshallerEx = new XPDLExMarshaller();
+
+        File xpdlExFile = new File(xpdlFile.getAbsolutePath().replace(".xpdl", "") + ".xpdlex");
+
+        //XPDL
+        if (xpdlFile.exists())
+            marshaller.Marshall(xpdlFile);
+        else {
+            File f = new File(xpdlFile.getAbsoluteFile() + ".xpdl");
+            marshaller.Marshall(f);
+        }
+        //XPDLEX
+        marshallerEx.Marshall(xpdlExFile);
     }
 
     public  void clear()
     {
+        xpdlsaveFile = null;
+
         gui.getGraph().clearSelection();
         ((mxGraphModel) gui.getGraph().getModel()).clear();
         //gui.getGraph().removeCells(gui.getGraph().getChildCells(gui.getGraph().getDefaultParent(), true, true));
