@@ -5,7 +5,6 @@ import nl.rug.ds.bpm.editor.core.enums.ConstraintType;
 import nl.rug.ds.bpm.editor.models.graphModels.SuperCell;
 import nl.rug.ds.bpm.verification.constraints.Formula;
 import nl.rug.ds.bpm.verification.models.kripke.Kripke;
-import nl.rug.ds.bpm.verification.models.kripke.State;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,13 +67,6 @@ public class ConstraintResult {
         //if imported the formula is already parsed
         if(constraintHolder.getConstraint().getConstraintType() == ConstraintType.Import) {
             ret = formula.getFormula();
-            
-            //add silent as AP if used
-            if(ret.toLowerCase().contains("silent")) {
-                for (State s : kripke.getInitialArray())
-                    s.getAtomicPropositions().add("silent");
-                kripke.addAtomicProposition("silent");
-            }
             
             //add used sourceIds
             for(SuperCell cell: ((ImportConstraint) constraintHolder).getCells())

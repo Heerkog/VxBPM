@@ -161,17 +161,18 @@ public class XPDLUnmarshaller {
                 element = AppCore.app.config.getInputElement("ParallelFork");
             else
                 element = AppCore.app.config.getInputElement("ParallelMerge");
-        }
-        //Inclusive
-        else if (actvity.getRoute() != null && actvity.getRoute().getGatewayType().equalsIgnoreCase("Inclusive")) {
+        } else if (actvity.getRoute() != null && actvity.getRoute().getGatewayType().equalsIgnoreCase("Inclusive")) {
             element = AppCore.app.config.getInputElement("InclusiveMerge");
-        }
-        //Exclusive
-        else if (actvity.getRoute() != null && actvity.getRoute().getGatewayType().equalsIgnoreCase("Exclusive")) {
+        } else if (actvity.getRoute() != null && actvity.getRoute().getGatewayType().equalsIgnoreCase("Exclusive")) {
             if (incomingCount == 1)
                 element = AppCore.app.config.getInputElement("ExclusiveFork");
             else
                 element = AppCore.app.config.getInputElement("ExclusiveMerge");
+        } else if (actvity.getRoute() != null && actvity.getRoute().getGatewayType().equalsIgnoreCase("Deferred")) {
+                if (incomingCount == 1)
+                    element = AppCore.app.config.getInputElement("DeferredChoice");
+                else
+                    element = AppCore.app.config.getInputElement("ExclusiveMerge");
         } else if (actvity.getRoute() != null && actvity.getRoute().getGatewayType().equalsIgnoreCase("Complex")) {
             if (incomingCount == 1)
                 element = AppCore.app.config.getInputElement("ComplexFork");

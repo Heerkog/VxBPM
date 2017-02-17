@@ -29,10 +29,14 @@ public class XMLSpecUnmarshaller {
     private BPMNGraph graph;
     private XmlSpec xmlSpec;
     private HashMap<String, InputCell> inputCells;
+    private HashMap<String, String> missingAP;
+    private ImportService importService;
 
     public XMLSpecUnmarshaller(File file) {
         graph = AppCore.gui.getGraph();
         inputCells = new HashMap<>();
+        missingAP = new HashMap<>();
+        importService = AppCore.gui.importService;
 
         try {
             JAXBContext context = JAXBContext.newInstance(XmlSpec.class);
@@ -52,20 +56,24 @@ public class XMLSpecUnmarshaller {
     }
 
     private void importAtomicPropositions() {
+        int m = 0;
         for(AtomicProposition p: xmlSpec.getAtomicPropositions()) {
             if (!p.getName().equalsIgnoreCase("silent")) {
                 InputCell cell = graph.getByName(p.getName());
                 if (cell != null) {
                     inputCells.put(p.getId(), cell);
                 } else {
-                    Console.error("Imported AP not in model:" + p.getName());
+                    missingAP.put(p.getId(), "NiM" + m);
+                    importService.addMissingAP( "NiM" + m);
+                    Console.error("Imported AP " + p.getName() + " not in model. Adding as NiM" + m);
+                    m++;
                 }
             }
         }
+        importService.addMissingAP( "silent");
     }
 
     private void importSpecifications() {
-        ImportService importService = AppCore.gui.importService;
         int id = 0;
 
         for(Specification specification: xmlSpec.getSpecifications()) {
@@ -96,6 +104,9 @@ public class XMLSpecUnmarshaller {
                         s = s.replaceAll(Pattern.quote(sid), cids);
                     }
                 }
+                for(String sid: missingAP.keySet()) {
+                    s = s.replaceAll(Pattern.quote(sid), missingAP.get(sid));
+                }
     
                 List<String> formulas = new ArrayList<>();
                 formulas.add(s);
@@ -121,10 +132,10 @@ public class XMLSpecUnmarshaller {
                     importService.addImportConstraint(importConstraint);
                 }
                 else
-                    Console.error("Error: Import arrow " + arrowId + " not found");
+                    Console.error("Error: Failed to import specification, because arrow " + arrowId + " not found");
             }
             else
-                Console.error("Error: Imported specification's source  " + specification.getSource() + " is missing.");
+                Console.error("Error: Failed to import specification " + specification.getValue() + ", because source " + specification.getSource() + " is missing.");
         }
     }
 }

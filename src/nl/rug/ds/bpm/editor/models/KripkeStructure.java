@@ -13,6 +13,7 @@ import nl.rug.ds.bpm.verification.modelConverters.KripkeConverter;
 import nl.rug.ds.bpm.verification.models.cpn.CPN;
 import nl.rug.ds.bpm.verification.models.cpn.Variable;
 import nl.rug.ds.bpm.verification.models.kripke.Kripke;
+import nl.rug.ds.bpm.verification.models.kripke.State;
 
 import java.util.*;
 
@@ -139,6 +140,13 @@ public class KripkeStructure {
                 unusedAps.removeAll(constraintResult.getTargetIds());
             }
         }
+        
+        List<String> missingAP = AppCore.gui.importService.getMissingAP();
+    
+        for (State s : kripke.getInitialArray())
+            s.getAtomicPropositions().addAll(missingAP);
+        kripke.addAtomicPropositions(missingAP);
+        
         /*if (unusedAps.contains("s"))
             unusedAps.add("s");
         if (unusedAps.contains("silent"))

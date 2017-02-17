@@ -10,9 +10,11 @@ import java.util.List;
  */
 public class ImportService {
     private List<ImportConstraint> importConstraints;
+    private List<String> missingAP;
 
     public ImportService() {
         importConstraints = new ArrayList<>();
+        missingAP = new ArrayList<>();
     }
 
     public void addImportConstraint(ImportConstraint importConstraint) {
@@ -22,8 +24,13 @@ public class ImportService {
     public List<ImportConstraint> getImportConstraints() {
         return importConstraints;
     }
+    
+    public void addMissingAP(String ap) { missingAP.add(ap); }
+    
+    public List<String> getMissingAP() { return missingAP; }
 
     public void clear() {
         importConstraints.clear();
+        missingAP.clear();
     }
 }

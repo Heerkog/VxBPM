@@ -24,7 +24,7 @@ public class Main extends JFrame {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             //UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
 

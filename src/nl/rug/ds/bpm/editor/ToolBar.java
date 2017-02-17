@@ -69,7 +69,7 @@ public class ToolBar extends JMenuBar {
 
         JMenuItem checkModel  = new JMenuItem("Verify");
         checkModel.setBorderPainted(false);
-        checkModel.setEnabled(false);
+        checkModel.setEnabled(true);
         verificationMenu.add(checkModel);
         checkModel.addActionListener(e -> {
             checkModel.setEnabled(false);
