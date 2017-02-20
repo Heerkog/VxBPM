@@ -7,8 +7,6 @@ import com.mxgraph.model.mxGeometry;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.swing.mxGraphOutline;
-import com.mxgraph.util.mxCellRenderer;
-import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxRectangle;
 import com.mxgraph.view.mxGraph;
 import nl.rug.ds.bpm.editor.GUIApplication;
@@ -22,13 +20,9 @@ import nl.rug.ds.bpm.verification.models.cpn.*;
 import nl.rug.ds.bpm.verification.models.kripke.Kripke;
 import nl.rug.ds.bpm.verification.models.kripke.State;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -78,7 +72,7 @@ public class KripkeView {
                 renderModel();
             }
         });
-
+/*
         graph.getSelectionModel().addListener(mxEvent.CHANGE, (s, e) -> {
                     try {
                         BufferedImage image = mxCellRenderer.createBufferedImage(graph, null, 1, Color.WHITE, true, null);
@@ -89,7 +83,7 @@ public class KripkeView {
                     }
                 }
         );
-
+*/
         KripkeView view = this;
         MouseWheelListener wheelTracker = new MouseWheelListener() {
             public void mouseWheelMoved(MouseWheelEvent e) {

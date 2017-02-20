@@ -3,6 +3,7 @@ package nl.rug.ds.bpm.editor.services;
 import nl.rug.ds.bpm.editor.models.ImportConstraint;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -10,11 +11,11 @@ import java.util.List;
  */
 public class ImportService {
     private List<ImportConstraint> importConstraints;
-    private List<String> missingAP;
+    private List<String> usedAP;
 
     public ImportService() {
         importConstraints = new ArrayList<>();
-        missingAP = new ArrayList<>();
+        usedAP = new ArrayList<>();
     }
 
     public void addImportConstraint(ImportConstraint importConstraint) {
@@ -25,12 +26,16 @@ public class ImportService {
         return importConstraints;
     }
     
-    public void addMissingAP(String ap) { missingAP.add(ap); }
+    public void addAP(String ap) { usedAP.add(ap); }
     
-    public List<String> getMissingAP() { return missingAP; }
+    public void addAllAP(List<String> ap) { usedAP.addAll(ap); }
+    
+    public void addAllAP(String[] ap) { addAllAP(new ArrayList<String>(Arrays.asList(ap))); }
+    
+    public List<String> getAP() { return usedAP; }
 
     public void clear() {
         importConstraints.clear();
-        missingAP.clear();
+        usedAP.clear();
     }
 }

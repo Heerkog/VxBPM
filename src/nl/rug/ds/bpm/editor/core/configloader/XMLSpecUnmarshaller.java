@@ -62,15 +62,16 @@ public class XMLSpecUnmarshaller {
                 InputCell cell = graph.getByName(p.getName());
                 if (cell != null) {
                     inputCells.put(p.getId(), cell);
+                    importService.addAllAP(cell.getCpnTransitionIds());
                 } else {
-                    missingAP.put(p.getId(), "NiM" + m);
-                    importService.addMissingAP( "NiM" + m);
-                    Console.error("Imported AP " + p.getName() + " not in model. Adding as NiM" + m);
-                    m++;
+                    String NiM = "NiM" + m++;
+                    missingAP.put(p.getId(), NiM);
+                    importService.addAP(NiM);
+                    Console.error("Imported AP " + p.getName() + " not in model. Adding as " + NiM);
                 }
             }
         }
-        importService.addMissingAP( "silent");
+        importService.addAP( "silent");
     }
 
     private void importSpecifications() {

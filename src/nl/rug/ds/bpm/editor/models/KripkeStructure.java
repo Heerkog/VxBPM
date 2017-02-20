@@ -4,6 +4,7 @@ import nl.rug.ds.bpm.editor.core.AppCore;
 import nl.rug.ds.bpm.editor.core.enums.EventType;
 import nl.rug.ds.bpm.editor.core.listeners.EventSource;
 import nl.rug.ds.bpm.editor.transformer.CPNConverter;
+import nl.rug.ds.bpm.verification.comparators.StringComparator;
 import nl.rug.ds.bpm.verification.constraints.Formula;
 import nl.rug.ds.bpm.verification.modelCheckers.AbstractChecker;
 import nl.rug.ds.bpm.verification.modelCheckers.MChecker;
@@ -129,7 +130,7 @@ public class KripkeStructure {
         TreeSet<String> unusedAps = (TreeSet) kripke.getAtomicPropositions().clone();
 
 
-        unusedAps.removeAll(Arrays.asList("start", "end"));
+        unusedAps.removeAll(Arrays.asList("start", "end", "silent"));
 
         for (IConstraintHolder constraintEdge : edges) {
             for (Formula formula : constraintEdge.getFormula()) {
@@ -141,20 +142,24 @@ public class KripkeStructure {
             }
         }
         
-        List<String> missingAP = AppCore.gui.importService.getMissingAP();
-    
-        for (State s : kripke.getInitialArray())
-            s.getAtomicPropositions().addAll(missingAP);
-        kripke.addAtomicPropositions(missingAP);
+        //add ghost State to host AP missing from model;
+        TreeSet<String> missingAP = new TreeSet<>(new StringComparator());
+        missingAP.addAll(AppCore.gui.importService.getAP());
+        missingAP.removeAll(kripke.getAtomicPropositions());
+        missingAP.add("silent");
         
-        /*if (unusedAps.contains("s"))
-            unusedAps.add("s");
-        if (unusedAps.contains("silent"))
-            unusedAps.add("silent");*/
-        if(AppCore.app.modelReductionEnabled)
+        List<String> missingList = new ArrayList<>(AppCore.gui.importService.getAP());
+        missingList.removeAll(kripke.getAtomicPropositions());
+        kripke.addAtomicPropositions(missingList);
+            
+        State ghost = new State("ghost", missingAP);
+        ghost.addNext(ghost);
+        kripke.addState(ghost);
+        
+        if(AppCore.app.modelReductionEnabled) {
             kripkeConverter.propositionOptimize(unusedAps);
-
-        int m = kripkeConverter.stutterOptimize();
+            int m = kripkeConverter.stutterOptimize();
+        }
         AbstractChecker checker = null;
 
         ModelChecker checkerSettings = AppCore.app.selectedModelChecker();
