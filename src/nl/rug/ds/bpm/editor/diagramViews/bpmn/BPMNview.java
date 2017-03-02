@@ -5,15 +5,18 @@ import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.mxGraphOutline;
 import com.mxgraph.util.*;
 import nl.rug.ds.bpm.editor.GUIApplication;
+import nl.rug.ds.bpm.editor.Main;
 import nl.rug.ds.bpm.editor.core.enums.EventType;
 import nl.rug.ds.bpm.editor.core.listeners.EventSource;
 import nl.rug.ds.bpm.editor.models.InputElement;
 import nl.rug.ds.bpm.editor.models.graphModels.InputCell;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -115,7 +118,12 @@ public class BPMNview {
                         InputCell inputCell = (InputCell) cell;
                         JPopupMenu menu = new JPopupMenu();
                         for (InputElement inputElement : inputCell.getInputElement().getPaletElement().getInputElements()) {
-                            ImageIcon image = new ImageIcon("../../../../../resources/inputElements/" + inputElement.getPaletIconPath());
+                            ImageIcon image = null;
+                            try {
+                                image = new ImageIcon(ImageIO.read(Main.class.getResourceAsStream("/resources/inputElements/" + inputElement.getPaletIconPath())));
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
 
                             JMenuItem item = new JMenuItem(inputElement.getName(), image);
                             if (inputElement.getId().equals(inputCell.getInputElement().getId()))

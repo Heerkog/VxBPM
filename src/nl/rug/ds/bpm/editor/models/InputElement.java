@@ -230,6 +230,9 @@ public class InputElement implements java.io.Serializable {
 
     public InputElement clone()
     {
-        return new InputElement(elemNode);
+        InputElement var1 = new InputElement(elemNode);
+        var1.setPaletElement(this.getPaletElement());
+        var1.setCpnTranformerElement(this.getCpnTranformerElement());
+        return var1;
     }
 }
