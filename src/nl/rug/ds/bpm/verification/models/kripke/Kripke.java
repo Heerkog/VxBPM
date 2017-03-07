@@ -19,7 +19,7 @@ public class Kripke {
         states = new TreeSet<State>(new StateComparator());
         initial = new TreeSet<State>(new StateComparator());
 
-        propositionOptimized = new TreeSet<>();
+        propositionOptimized = new TreeSet<>(new StringComparator());
         stutterOptimizedStates = new ArrayList<>();
     }
 
