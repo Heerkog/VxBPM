@@ -1,5 +1,7 @@
 package nl.rug.ds.bpm.verification.models.kripke;
 
+import nl.rug.ds.bpm.verification.modelOptimizers.Block;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -12,6 +14,9 @@ public class State implements Comparable<State> {
     private String marking;
     private Set<String> atomicPropositions;
     private HashSet<State> nextStates, previousStates;
+    //stutter variables
+    private boolean flag = false;
+    private Block block;
 
     public State(String marking, TreeSet<String> atomicPropositions) {
         this.id = "S" + stateID++;
@@ -89,7 +94,7 @@ public class State implements Comparable<State> {
 
     @Override
     public boolean equals(Object arg0) {
-        return (arg0 == null ? false : getAPString().equals(((State) arg0).getAPString()));
+        return (arg0 != null && getAPString().equals(((State) arg0).getAPString()));
     }
 
     @Override
@@ -115,4 +120,18 @@ public class State implements Comparable<State> {
     public void clearMarking() {
         marking = "";
     }
+    
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+    
+    public boolean getFlag() {
+        return flag;
+    }
+    
+    public void setBlock(Block block) { this.block = block; }
+    
+    public void resetBlock() { block = null; }
+    
+    public Block getBlock() { return block; }
 }
