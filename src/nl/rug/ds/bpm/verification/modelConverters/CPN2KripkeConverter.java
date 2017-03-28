@@ -9,12 +9,12 @@ import nl.rug.ds.bpm.verification.models.kripke.State;
 
 import java.util.*;
 
-public class KripkeConverter {
+public class CPN2KripkeConverter {
     private CPN cpn;
     private Kripke kripke;
 
 
-    public KripkeConverter(CPN cpn) {
+    public CPN2KripkeConverter(CPN cpn) {
 
         this.cpn = cpn;
     }

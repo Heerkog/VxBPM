@@ -1,6 +1,6 @@
 package nl.rug.ds.bpm.verification.models.kripke;
 
-import nl.rug.ds.bpm.verification.modelOptimizers.Block;
+import nl.rug.ds.bpm.verification.modelOptimizers.stutterOptimizer.Block;
 
 import java.util.HashSet;
 import java.util.Iterator;

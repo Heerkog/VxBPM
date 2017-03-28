@@ -10,7 +10,9 @@ import nl.rug.ds.bpm.verification.modelCheckers.AbstractChecker;
 import nl.rug.ds.bpm.verification.modelCheckers.MChecker;
 import nl.rug.ds.bpm.verification.modelCheckers.NuSMVChecker;
 import nl.rug.ds.bpm.verification.modelCheckers.NuXMVChecker;
-import nl.rug.ds.bpm.verification.modelConverters.KripkeConverter;
+import nl.rug.ds.bpm.verification.modelConverters.CPN2KripkeConverter;
+import nl.rug.ds.bpm.verification.modelOptimizers.propositionOptimizer.PropositionOptimizer;
+import nl.rug.ds.bpm.verification.modelOptimizers.stutterOptimizer.StutterOptimizer;
 import nl.rug.ds.bpm.verification.models.cpn.CPN;
 import nl.rug.ds.bpm.verification.models.cpn.Variable;
 import nl.rug.ds.bpm.verification.models.kripke.Kripke;
@@ -31,7 +33,7 @@ public class KripkeStructure {
 
     Set<Integer> namedVariables = new HashSet<>();
     private Kripke kripke;
-    public KripkeConverter kripkeConverter;
+    public CPN2KripkeConverter CPN2KripkeConverter;
     List<ConstraintResult> constraintResults = new ArrayList<>();
 
     public KripkeStructure(int id) {
@@ -120,9 +122,9 @@ public class KripkeStructure {
         cpn.init();
 
 
-        kripkeConverter = new KripkeConverter(cpn);
+        CPN2KripkeConverter = new CPN2KripkeConverter(cpn);
 
-        kripke = kripkeConverter.convert();
+        kripke = CPN2KripkeConverter.convert();
 
 
         constraintResults = new ArrayList<>();
@@ -157,8 +159,17 @@ public class KripkeStructure {
         kripke.addState(ghost);
         
         if(AppCore.app.modelReductionEnabled) {
-            kripkeConverter.propositionOptimize(unusedAps);
-            int m = kripkeConverter.stutterOptimize();
+            //CPN2KripkeConverter.propositionOptimize(unusedAps);
+            //int m = CPN2KripkeConverter.stutterOptimize();
+            PropositionOptimizer propositionOptimizer = new PropositionOptimizer(kripke);
+            propositionOptimizer.optimize(unusedAps);
+
+            System.out.println(propositionOptimizer.toString(true));
+
+            StutterOptimizer stutterOptimizer  = new StutterOptimizer(kripke);
+            stutterOptimizer.optimize();
+
+            System.out.println(stutterOptimizer.toString(true));
         }
         AbstractChecker checker = null;
 

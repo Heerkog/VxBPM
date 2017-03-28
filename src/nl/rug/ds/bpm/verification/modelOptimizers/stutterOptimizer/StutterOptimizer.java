@@ -1,4 +1,4 @@
-package nl.rug.ds.bpm.verification.modelOptimizers;
+package nl.rug.ds.bpm.verification.modelOptimizers.stutterOptimizer;
 
 import nl.rug.ds.bpm.verification.models.kripke.Kripke;
 import nl.rug.ds.bpm.verification.models.kripke.State;
@@ -10,7 +10,8 @@ import java.util.*;
  */
 public class StutterOptimizer {
 	private Kripke kripke;
-	List<Block> toBeProcessed, stable, BL;
+	private Set<State> stutterStates;
+	private List<Block> toBeProcessed, stable, BL;
 	
 	public StutterOptimizer(Kripke kripke) {
 		this.kripke = kripke;
@@ -18,6 +19,8 @@ public class StutterOptimizer {
 		toBeProcessed = new ArrayList<>();
 		stable = new ArrayList<>();
 		BL = new ArrayList<>();
+
+		stutterStates = new HashSet<State>();
 		
 		preProcess();
 	}
@@ -67,27 +70,57 @@ public class StutterOptimizer {
 			stable.add(bAccent);
 			toBeProcessed.remove(bAccent);
 		}
-		
-		int stutterBlocks = 0;
+
 		//merge blocks with size > 1
 		for(Block b: stable) {
 			if(b.size() > 1) {
-				stutterBlocks++;
-				
 				Iterator<State> i = b.getBottom().iterator();
-				State s = i.next();
+				State s = i.next();  //there shouldn't exist empty blocks
 				Set<State> previous = new HashSet<State>(s.getPreviousStates());
 				Set<State> next = new HashSet<State>(s.getNextStates());
 				while (i.hasNext()) {
 					State n = i.next();
+					stutterStates.add(n);
 					previous.addAll(n.getPreviousStates());
-					
+					next.addAll(n.getNextStates());
 				}
-					
+
+				Iterator<State> j = b.getNonbottom().iterator();
+				while (j.hasNext()) {
+					State n = j.next();
+					stutterStates.add(n);
+					previous.addAll(n.getPreviousStates());
+					next.addAll(n.getNextStates());
+				}
+
+				previous.removeAll(b.getBottom());
+				previous.removeAll(b.getNonbottom());
+				next.removeAll(b.getBottom());
+				next.removeAll(b.getNonbottom());
+
+				for(State p: previous) {
+					p.getNextStates().removeAll(b.getBottom());
+					p.getNextStates().removeAll(b.getNonbottom());
+					p.addNext(s);
+				}
+
+				for(State n: next) {
+					n.getPreviousStates().removeAll(b.getBottom());
+					n.getPreviousStates().removeAll(b.getNonbottom());
+					n.addPrevious(s);
+				}
+
+				s.getNextStates().clear();
+				s.getPreviousStates().clear();
+
+				s.addNext(next);
+				s.addPrevious(previous);
 			}
 		}
+
+		kripke.getStates().removeAll(stutterStates);
 		
-		return stutterBlocks;
+		return stutterStates.size();
 	}
 	
 	private void preProcess() {
@@ -136,13 +169,13 @@ public class StutterOptimizer {
 	public String toString(boolean fullOutput) {
 		StringBuilder sb = new StringBuilder();
 		if (fullOutput) {
-			sb.append("\nproposition Optimized Transitions:\n");
-			for (State s : stutterOptimizedStates)
+			sb.append("\nStutter Optimized States:\n");
+			for (State s : stutterStates)
 				sb.append(s.toFriendlyString() + "\n");
 			
 		}
 		
-		sb.append("Number of stutter Optimized States: " + stutterOptimizedStates.size() + "\n");
+		sb.append("Number of stutter Optimized States: " + stutterStates.size() + "\n");
 		
 		return sb.toString();
 	}
@@ -150,5 +183,5 @@ public class StutterOptimizer {
 	public String toString() {
 		return toString(true);
 	}
-	
+
 }

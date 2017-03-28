@@ -35,7 +35,7 @@ public class Main extends JFrame {
         int height = (int)screenSize.getHeight();
 
         JFrame frame = AppCore.gui.getFrame();
-        frame.setTitle("VxBPM v1.1.0");
+        frame.setTitle("VxBPM v0.2.0");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 720);
         frame.setLocation((width-1000)/2, (height-720)/2);
