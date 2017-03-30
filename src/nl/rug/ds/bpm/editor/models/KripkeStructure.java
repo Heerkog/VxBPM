@@ -164,12 +164,13 @@ public class KripkeStructure {
             PropositionOptimizer propositionOptimizer = new PropositionOptimizer(kripke);
             propositionOptimizer.optimize(unusedAps);
 
-            System.out.println(propositionOptimizer.toString(true));
+            System.out.println(propositionOptimizer.toString());
 
             StutterOptimizer stutterOptimizer  = new StutterOptimizer(kripke);
+            System.out.println(stutterOptimizer.toString());
             stutterOptimizer.optimize();
 
-            System.out.println(stutterOptimizer.toString(true));
+            System.out.println(stutterOptimizer.toString());
         }
         AbstractChecker checker = null;
 

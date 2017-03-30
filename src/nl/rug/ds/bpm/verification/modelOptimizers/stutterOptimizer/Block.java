@@ -1,5 +1,6 @@
 package nl.rug.ds.bpm.verification.modelOptimizers.stutterOptimizer;
 
+import nl.rug.ds.bpm.verification.comparators.ListComparator;
 import nl.rug.ds.bpm.verification.models.kripke.State;
 
 import java.util.*;
@@ -9,25 +10,25 @@ import java.util.*;
  */
 public class Block {
 	private boolean flag;
-	private List<State> bottom, nonbottom, entry;
+	private Set<State> bottom, nonbottom, entry;
 
 	public Block() {
 		flag = false;
-		bottom = new ArrayList<>();
-		nonbottom = new ArrayList<>();
-		entry = new ArrayList<>();
+		bottom = new TreeSet<>(new ListComparator());
+		nonbottom = new TreeSet<>(new ListComparator());
+		entry = new TreeSet<>(new ListComparator());
 	}
 
-	public Block(List<State> bottom, List<State> nonbottom) {
+	public Block(Set<State> bottom, Set<State> nonbottom) {
 		flag = false;
 		this.bottom = bottom;
 		this.nonbottom = nonbottom;
-		entry = new ArrayList<>();
+		entry = new TreeSet<>(new ListComparator());
 	}
 
 	public Block split() {
-		List<State> bot = new ArrayList<>();
-		List<State> nonbot = new ArrayList<>();
+		Set<State> bot = new TreeSet<>(new ListComparator());
+		Set<State> nonbot = new TreeSet<>(new ListComparator());
 
 		for(State b: bottom)
 			if(!b.getFlag())
@@ -35,9 +36,9 @@ public class Block {
 
 		//if flag down and next in bot or nonbot, add to nonbot
 		//BSF added, so iterate back to front
-		ListIterator<State> iterator = nonbottom.listIterator(nonbottom.size());
-		while (iterator.hasPrevious()) {
-			State nb = iterator.previous();
+		Iterator<State> iterator = ((TreeSet)nonbottom).descendingIterator();
+		while (iterator.hasNext()) {
+			State nb = iterator.next();
 			if (!nb.getFlag()) {
 				boolean isB2 = true;
 				Iterator<State> next = nb.getNextStates().iterator();
@@ -67,7 +68,8 @@ public class Block {
 					entry.add(previous);
 
 		//nonbot was filled in reverse
-		Collections.reverse(nonbot);
+		nonbot = ((TreeSet)nonbot).descendingSet();
+
 		//make B2
 		Block block = new Block(bot, nonbot);
 
@@ -91,6 +93,7 @@ public class Block {
 		entry.addAll(b.getEntry());
 
 		flag = flag && b.getFlag();
+		b = null;
 	}
 
 	public void init() {
@@ -143,16 +146,17 @@ public class Block {
 					entry.add(previous);
 
 		bottom.addAll(newBottom);
+		nonbottom.removeAll(newBottom);
 
 		//return true if new bottom states were found
 		return !newBottom.isEmpty();
 	}
 
-	public List<State> getBottom() { return bottom;	}
+	public Set<State> getBottom() { return bottom;	}
 
-	public List<State> getNonbottom() { return nonbottom; }
+	public Set<State> getNonbottom() { return nonbottom; }
 
-	public List<State> getEntry() { return entry; }
+	public Set<State> getEntry() { return entry; }
 
 	public void addState(State state) {
 		nonbottom.add(state);
@@ -167,4 +171,27 @@ public class Block {
 	}
 
 	public int size() { return nonbottom.size() + bottom.size(); }
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder("{");
+
+		Iterator<State> bi = bottom.iterator();
+		while(bi.hasNext()) {
+			sb.append(bi.next().toFriendlyString());
+			if (bi.hasNext())
+				sb.append(", ");
+		}
+
+		Iterator<State> nbi = nonbottom.iterator();
+		if(nbi.hasNext())
+			sb.append(" | ");
+		while(nbi.hasNext()) {
+			sb.append(nbi.next().toFriendlyString());
+			if (nbi.hasNext())
+				sb.append(", ");
+		}
+
+		sb.append("}");
+		return sb.toString();
+	}
 }

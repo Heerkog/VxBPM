@@ -51,11 +51,18 @@ public class StutterOptimizer {
 					stable.remove(b);
 					
 					Block b2 = b.split();
+					toBeProcessed.add(b);
+					toBeProcessed.add(b2);
+
+					b.reinit();
+
+
 					//if additional bottom states are created, clear stable
 					if(b2.reinit()) {
 						toBeProcessed.addAll(stable);
 						stable.clear();
 					}
+					System.out.println("Split: " + b.toString() + " & " + b2.toString());
 				}
 			}
 			BL.clear();
@@ -132,6 +139,7 @@ public class StutterOptimizer {
 			
 			preProcessBSF(s);
 		}
+		System.out.println("Done");
 		
 		for(Block b: toBeProcessed)
 			b.init();
@@ -143,13 +151,15 @@ public class StutterOptimizer {
 				if(next.getBlock() == null) {
 					s.getBlock().addState(next);
 					next.setBlock(s.getBlock());
-					
+
+					System.out.println("Existing Block");
 					preProcessBSF(next);
 				}
 				else {
 					Block merge = next.getBlock();
 					toBeProcessed.remove(merge);
 					s.getBlock().merge(merge);
+					System.out.println("Merge Block");
 				}
 			}
 			else {
@@ -158,7 +168,8 @@ public class StutterOptimizer {
 					b.addState(next);
 					next.setBlock(b);
 					toBeProcessed.add(b);
-					
+
+					System.out.println("New Block");
 					preProcessBSF(next);
 				}
 				//else already preprocessed correctly
@@ -169,10 +180,12 @@ public class StutterOptimizer {
 	public String toString(boolean fullOutput) {
 		StringBuilder sb = new StringBuilder();
 		if (fullOutput) {
-			sb.append("\nStutter Optimized States:\n");
-			for (State s : stutterStates)
-				sb.append(s.toFriendlyString() + "\n");
-			
+			sb.append("\nUnstable Block Partition:\n");
+			for (Block b: toBeProcessed)
+				sb.append(b.toString() + "\n");
+			sb.append("\nStable Block Partition:\n");
+			for (Block b: stable)
+				sb.append(b.toString() + "\n");
 		}
 		
 		sb.append("Number of stutter Optimized States: " + stutterStates.size() + "\n");
