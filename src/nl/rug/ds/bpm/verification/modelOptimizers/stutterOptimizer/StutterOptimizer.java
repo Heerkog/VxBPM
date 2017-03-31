@@ -62,7 +62,7 @@ public class StutterOptimizer {
 						toBeProcessed.addAll(stable);
 						stable.clear();
 					}
-					System.out.println("Split: " + b.toString() + " & " + b2.toString());
+					//System.out.println("Split: " + b.toString() + " & " + b2.toString());
 				}
 			}
 			BL.clear();
