@@ -163,15 +163,13 @@ public class KripkeStructure {
             //int m = CPN2KripkeConverter.stutterOptimize();
             PropositionOptimizer propositionOptimizer = new PropositionOptimizer(kripke);
             propositionOptimizer.optimize(unusedAps);
-
-            System.out.println(propositionOptimizer.toString());
-
+            kripke.setPropositionOptimized(unusedAps);
+    
             StutterOptimizer stutterOptimizer  = new StutterOptimizer(kripke);
-            System.out.println(stutterOptimizer.toString());
             stutterOptimizer.optimize();
-
-            System.out.println(stutterOptimizer.toString());
+            kripke.setStutterOptimizedStates(stutterOptimizer.getStutterStates());
         }
+        
         AbstractChecker checker = null;
 
         ModelChecker checkerSettings = AppCore.app.selectedModelChecker();

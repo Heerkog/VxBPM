@@ -99,6 +99,10 @@ public class CPN2KripkeConverter {
         }
     }
 
+    /****************************************************
+     * Deprecated                                       *
+     * **************************************************/
+    /*
     public int stutterOptimize() {
         List<State> remove = new ArrayList<State>();
         Iterator<State> i = kripke.getStates().iterator();
@@ -161,6 +165,7 @@ public class CPN2KripkeConverter {
 
         kripke.getAtomicPropositions().removeAll(AP);
     }
+    */
 
     private List<List<Transition>> getTransitionSets(int[] m) {
         ArrayList<List<Transition>> enabledSets = new ArrayList<List<Transition>>();

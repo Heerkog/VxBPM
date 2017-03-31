@@ -16,9 +16,9 @@ public class StutterOptimizer {
 	public StutterOptimizer(Kripke kripke) {
 		this.kripke = kripke;
 		
-		toBeProcessed = new ArrayList<>();
-		stable = new ArrayList<>();
-		BL = new ArrayList<>();
+		toBeProcessed = new LinkedList<>();
+		stable = new LinkedList<>();
+		BL = new LinkedList<>();
 
 		stutterStates = new HashSet<State>();
 		
@@ -139,7 +139,6 @@ public class StutterOptimizer {
 			
 			preProcessBSF(s);
 		}
-		System.out.println("Done");
 		
 		for(Block b: toBeProcessed)
 			b.init();
@@ -152,14 +151,15 @@ public class StutterOptimizer {
 					s.getBlock().addState(next);
 					next.setBlock(s.getBlock());
 
-					System.out.println("Existing Block");
 					preProcessBSF(next);
 				}
 				else {
-					Block merge = next.getBlock();
-					toBeProcessed.remove(merge);
-					s.getBlock().merge(merge);
-					System.out.println("Merge Block");
+					if(s.getBlock() != next.getBlock()) {
+						Block merge = next.getBlock();
+						toBeProcessed.remove(merge);
+						s.getBlock().merge(merge);
+					}
+					//else both already in same block
 				}
 			}
 			else {
@@ -169,7 +169,6 @@ public class StutterOptimizer {
 					next.setBlock(b);
 					toBeProcessed.add(b);
 
-					System.out.println("New Block");
 					preProcessBSF(next);
 				}
 				//else already preprocessed correctly
@@ -193,8 +192,9 @@ public class StutterOptimizer {
 		return sb.toString();
 	}
 	
+	public Set<State> getStutterStates() { return stutterStates; }
+	
 	public String toString() {
 		return toString(true);
 	}
-
 }

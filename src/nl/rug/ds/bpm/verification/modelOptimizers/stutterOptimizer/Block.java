@@ -1,6 +1,5 @@
 package nl.rug.ds.bpm.verification.modelOptimizers.stutterOptimizer;
 
-import nl.rug.ds.bpm.verification.comparators.ListComparator;
 import nl.rug.ds.bpm.verification.models.kripke.State;
 
 import java.util.*;
@@ -10,25 +9,25 @@ import java.util.*;
  */
 public class Block {
 	private boolean flag;
-	private Set<State> bottom, nonbottom, entry;
+	private List<State> bottom, nonbottom, entry;
 
 	public Block() {
 		flag = false;
-		bottom = new TreeSet<>(new ListComparator());
-		nonbottom = new TreeSet<>(new ListComparator());
-		entry = new TreeSet<>(new ListComparator());
+		bottom = new LinkedList<>();
+		nonbottom = new LinkedList<>();
+		entry = new LinkedList<>();
 	}
 
-	public Block(Set<State> bottom, Set<State> nonbottom) {
+	public Block(List<State> bottom, List<State> nonbottom) {
 		flag = false;
 		this.bottom = bottom;
 		this.nonbottom = nonbottom;
-		entry = new TreeSet<>(new ListComparator());
+		entry = new LinkedList<>();
 	}
 
 	public Block split() {
-		Set<State> bot = new TreeSet<>(new ListComparator());
-		Set<State> nonbot = new TreeSet<>(new ListComparator());
+		List<State> bot = new LinkedList<>();
+		List<State> nonbot = new LinkedList<>();
 
 		for(State b: bottom)
 			if(!b.getFlag())
@@ -36,9 +35,9 @@ public class Block {
 
 		//if flag down and next in bot or nonbot, add to nonbot
 		//BSF added, so iterate back to front
-		Iterator<State> iterator = ((TreeSet)nonbottom).descendingIterator();
-		while (iterator.hasNext()) {
-			State nb = iterator.next();
+		ListIterator<State> iterator = nonbottom.listIterator(nonbottom.size());
+		while (iterator.hasPrevious()) {
+			State nb = iterator.previous();
 			if (!nb.getFlag()) {
 				boolean isB2 = true;
 				Iterator<State> next = nb.getNextStates().iterator();
@@ -68,8 +67,8 @@ public class Block {
 					entry.add(previous);
 
 		//nonbot was filled in reverse
-		nonbot = ((TreeSet)nonbot).descendingSet();
-
+		Collections.sort(nonbot, Collections.reverseOrder());
+		
 		//make B2
 		Block block = new Block(bot, nonbot);
 
@@ -152,11 +151,11 @@ public class Block {
 		return !newBottom.isEmpty();
 	}
 
-	public Set<State> getBottom() { return bottom;	}
+	public List<State> getBottom() { return bottom;	}
 
-	public Set<State> getNonbottom() { return nonbottom; }
+	public List<State> getNonbottom() { return nonbottom; }
 
-	public Set<State> getEntry() { return entry; }
+	public List<State> getEntry() { return entry; }
 
 	public void addState(State state) {
 		nonbottom.add(state);
