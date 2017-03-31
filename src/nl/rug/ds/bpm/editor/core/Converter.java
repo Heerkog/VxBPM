@@ -17,7 +17,7 @@ import nl.rug.ds.bpm.editor.services.ConstraintService;
 import nl.rug.ds.bpm.editor.transformer.CPNConverter;
 import nl.rug.ds.bpm.editor.transformer.CPNGroup;
 import nl.rug.ds.bpm.verification.constraints.Formula;
-import nl.rug.ds.bpm.verification.modelConverters.KripkeConverter;
+import nl.rug.ds.bpm.verification.modelConverters.CPN2KripkeConverter;
 import nl.rug.ds.bpm.verification.models.cpn.CPN;
 import nl.rug.ds.bpm.verification.models.cpn.CPNElement;
 import nl.rug.ds.bpm.verification.models.cpn.Variable;
@@ -39,7 +39,7 @@ public class Converter {
     public List<EdgeCell> edgeCells;
     public List<ConstrainEdgeCell> constrainCells;
     public HashMap<String, List<CPNElement>> bpmnToCPNLookup;
-    public KripkeConverter kripkeConverter;
+    public CPN2KripkeConverter CPN2KripkeConverter;
     public HashMap<Integer, Variable> variables;
     public List<Formula> formulas;
     private List<IConstraintHolder> constraintHolders;
@@ -62,7 +62,7 @@ public class Converter {
 
 
         EventSource.addListener(EventType.KRIPKE_STRUCTURE_VALUE_CHANGE, e -> {
-            KripkeStructure structure = AppCore.app.getKripkeStructures().get((int) e);
+            KripkeStructure structure = AppCore.app.getKripkeStructures().get(e);
             generateKripkeStucture(structure);
         });
 
@@ -247,8 +247,8 @@ public class Converter {
     private void GenerateKripke() {
 
 
-        kripkeConverter = new KripkeConverter(cpn);
-        kripke = kripkeConverter.convert();
+        CPN2KripkeConverter = new CPN2KripkeConverter(cpn);
+        kripke = CPN2KripkeConverter.convert();
 
         for (KripkeStructure structure : AppCore.app.getKripkeStructures().values()) {
             generateKripkeStucture(structure);

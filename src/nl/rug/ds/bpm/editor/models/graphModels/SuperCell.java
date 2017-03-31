@@ -167,7 +167,7 @@ public class SuperCell extends mxCell implements Cloneable, java.io.Serializable
         SuperCell var1 = (SuperCell) super.clone();
         var1.cellProperties = new CellProperties();
         var1.cellProperties.addProperty(new CellProperty(PropertyFieldType.TextField, "Id", "Id", value.toString()));
-        var1.constrain = null;
+        var1.constrain = this.getConstraint();
 
         return var1;
     }

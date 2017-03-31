@@ -9,6 +9,7 @@ import nl.rug.ds.bpm.editor.models.IConstraintHolder;
 import nl.rug.ds.bpm.editor.models.graphModels.ConstrainEdgeCell;
 import nl.rug.ds.bpm.editor.models.graphModels.EdgeCell;
 import nl.rug.ds.bpm.editor.models.graphModels.InputCell;
+import nl.rug.ds.bpm.editor.models.graphModels.SuperCell;
 import nl.rug.ds.bpm.jaxb.xpdlEx.ActivityConstraint;
 import nl.rug.ds.bpm.jaxb.xpdlEx.Transition;
 import nl.rug.ds.bpm.jaxb.xpdlEx.XPDLConstraint;
@@ -57,8 +58,8 @@ public class XPDLExMarshaller {
         for (ConstrainEdgeCell edge : bpmnService.getRelations()) {
             XPDLConstraint XPDLConstraint = new XPDLConstraint(
                     edge.getVisibleId(),
-                    edge.getSource() != null ? edge.getSource().getId() : null,
-                    edge.getTarget() != null ? edge.getTarget().getId() : null,
+                    edge.getSource() != null ? ((SuperCell)edge.getSource()).getVisibleId() : null,
+                    edge.getTarget() != null ? ((SuperCell)edge.getTarget()).getVisibleId() : null,
                     edge.getConstraint().getId()
             );
             xpdlEx.AddConstraint(XPDLConstraint);

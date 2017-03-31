@@ -3,7 +3,10 @@ package nl.rug.ds.bpm.verification.models.kripke;
 import nl.rug.ds.bpm.verification.comparators.StateComparator;
 import nl.rug.ds.bpm.verification.comparators.StringComparator;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Kripke {
     private TreeSet<String> atomicPropositions;
@@ -12,7 +15,7 @@ public class Kripke {
 
 
     private Set<String> propositionOptimized;
-    private List<State> stutterOptimizedStates;
+    private Set<State> stutterOptimizedStates;
 
     public Kripke() {
         atomicPropositions = new TreeSet<String>(new StringComparator());
@@ -20,7 +23,7 @@ public class Kripke {
         initial = new TreeSet<State>(new StateComparator());
 
         propositionOptimized = new TreeSet<>(new StringComparator());
-        stutterOptimizedStates = new ArrayList<>();
+        stutterOptimizedStates = new TreeSet<State>(new StateComparator());
     }
 
     public boolean addAtomicProposition(String ap) {
@@ -51,8 +54,8 @@ public class Kripke {
         this.propositionOptimized = propositionOptimized;
     }
 
-    public void setStutterOptimizedStates(List<State> stutterOptimizedStates) {
-        this.stutterOptimizedStates = stutterOptimizedStates;
+    public void setStutterOptimizedStates(Set<State> stutterOptimizedStates) {
+        this.stutterOptimizedStates.addAll(stutterOptimizedStates);
     }
 
     public TreeSet<String> getAtomicPropositions() {
